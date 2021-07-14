@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>test</title>
+      <link href="/2021/06/22/test/"/>
+      <url>/2021/06/22/test/</url>
+      
+        <content type="html"><![CDATA[<p><img src="E:\210223-SpringBoot\SpringCloud\images\springcloud01.png" alt="springcloud01"></p><p><img src="C:\Users\DELL\Desktop\home\pic\IMG_20200710_212137.jpg" alt="IMG_20200710_212137"></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>SpringCloud</title>
+      <link href="/2021/06/22/springcloud/"/>
+      <url>/2021/06/22/springcloud/</url>
+      
+        <content type="html"><![CDATA[<h2 id="一、初识Spring-Cloud"><a href="#一、初识Spring-Cloud" class="headerlink" title="一、初识Spring Cloud"></a>一、初识Spring Cloud</h2><p>通常而言，微服务架构是一种架构模式或者说一种架构风格，它提倡将单一应用程序划分成一组小的服务，每个服务运行在其独立的进程中，服务之间互相协调、互相配合，为用户提供最终的价值。</p><p>服务之间采用轻量级的通信机制（通常是基于HTTP的RESTful API）。每个服务都围绕着具体业务进行构建，并且能够被独立地部署到生产环境等。</p><p>另外，应尽量避免统一的、集中式的服务管理机制，对具体的一个服务而言，应根据业务上下文，选择合适的语言、工具对其进行构建，可以有一个非常轻量级的集中式管理来协调这些服务，可以使用不同的语言来开发这些服务，也可以使用不同的数据存储。</p><h3 id="1-1-目标"><a href="#1-1-目标" class="headerlink" title="1.1 目标"></a>1.1 目标</h3><ul><li>了解微服务架构</li><li>了解SpringCloud技术</li></ul><p><strong>微服务是什么？</strong></p><p>微服务化的核心就是将传统的一站式应用，根据业务拆分成一个一个的服务，彻底去掉耦合，每一个微服务提供单个业务功能，一个服务只做一件事。</p><p>从技术角度讲就是一种小而独立的处理过程，类似与进程的概念，能够自行单独启动或销毁，可以拥有自己独立的数据库。</p><p><strong>微服务的优缺点</strong></p><p><strong>微服务优点：</strong></p><p>1.每个服务足够内聚，足够小，代码容易理解。这样能聚焦一个业务功能或业务需求。</p><p>2.开发简单、开发效率提高，一个服务可能就是专业的只干一件事，微服务能够被小团队单独开发，这个小团队可以是2到5人的开发人员组成。</p><p>3.微服务是松耦合的，是有功能意义的服务，无论是在开发阶段或部署阶段都是独立的。</p><p>4.微服务能使用不同的语言开发。</p><p>5.易于和第三方集成，微服务运行容易且灵活的方式集成自动部署。</p><p>6.微服务易于被一个开发人员理解、修改和维护，这样小团队能够更关注自己的工作成果，无需通过合作才能体现价值。</p><p>7.微服务允许你利用融合最新技术。微服务只是业务逻辑的代码，不会和HTML/CSS或其他界面组件混合，即前后端分离。</p><p>8.每个微服务都有自己的存储能力，可以有自己的数据库，也可以有统一数据库。</p><p><strong>微服务的缺点：</strong></p><p>开发人员要处理分布式系统的复杂性。</p><h3 id="1-2-讲解"><a href="#1-2-讲解" class="headerlink" title="1.2 讲解"></a>1.2 讲解</h3><h4 id="1-2-1-技术架构演变"><a href="#1-2-1-技术架构演变" class="headerlink" title="1.2.1 技术架构演变"></a>1.2.1 技术架构演变</h4><p>(1)单一应用架构</p><p>当网站流量很小时，只需要一个应用，所有功能部署在一起，减少部署节点成本的框架称之为集中式框架。此时，用于简化增删改查工作量的数据访问框架(ORM)是影响项目开发的关键。</p><p>传统架构其实就是SSH或SSM，属于单点应用，把整个业务模块都会在一个项目进行开发，分为MVC架构，会拆分成控制层、业务逻辑层、数据库访问层（持久层）。</p><p>传统架构一般适合于一个人或者小型团队开发。</p><p>缺点：耦合度太高，一旦某个模块导致服务不可用，可能会影响到其他模块。</p><p>(2)垂直应用架构</p><p>当访问量逐渐增大，单一应用增加机器带来的加速度越来越小，将应用拆成互不相干的几个应用，以提升效率。此时，用于加速前端页面开发的Web框架(MVC)是关键。</p><p><img src="D:\blog\blog\source_posts\SpringCloud\springcloud01.png" alt="springcloud01"></p><p>(3)分布式服务架构</p><p>分布式架构是基于传统架构演变过来的，将传统的项目以项目模块拆分成多个子项目，比如：</p><p>拆分会员项目、订单项目、支付项目、优惠券项目等，每个项目都有自己的独立数据库，独立redis等。</p><p>优点：<br>　　1、把模块拆分，使用接口通信，降低模块之间的耦合度。<br>　　2、把项目拆分成若干个子项目，不同的团队负责不同的子项目。<br>　　3、增加功能时只需要再增加一个子项目，调用其他系统的接口就可以。<br>　　4、可以灵活的进行分布式部署。<br>　　（并发量太大的话就要使用缓存（memcached、radis等））</p><p>缺点：</p><p>　　系统之间交互需要使用远程通信，接口开发增加工作量。</p><p>(4)面向服务(SOA)架构</p><p>SOA架构代表面向服务架构，俗称服务化。通俗的理解为面向于业务逻辑层开发，将共同的业务逻辑抽取出来形成的一个服务。提供给其他服务接口进行调用，服务于服务之间调用使用rpc远程技术。</p><p><strong>微服务架构</strong></p><p>微服务架构是从SOA架构中演变过来的，比SOA架构上的粒度更加精细。让专业的人做专业的事情，目的就是为了提高效率。每个服务之间互相不受影响，每个服务必须独立部署（独立数据库、独立Redis等），微服务架构更加轻量级，采用restful风格提供的API，也就是使用HTTP协议+json格式进行传输，更加轻巧，更加适用于互联网公司敏捷开发、快速迭代产品。</p><p>　　微服务架构如何拆分：</p><p>　　1、微服务把每一个职责，单一功能存放在独立服务器中。</p><p>　　2、每个服务运行在单独进程中，能够单独启动或销毁。</p><p>　　3、每个服务有自己独立的数据库存储，实际上有自己独立的缓存、数据库、消息队列等资源。</p><p><strong>微服务架构与SOA架构的区别</strong></p><p>　　（1）、微服务架构基于SOA架构演变过来，继承SOA架构的优点，在微服务架构中去除SOA架构中的ESB消息总线，采用http+json（restful）进行传输。</p><p>　　（2）、微服务架构对比SOA架构粒度会更加精细，让专业的人干专业的事情，目的是为了提高效率，每个服务于服务之间互不影响。在微服务架构中，每个服务必须独立部署，微服务架构更加轻巧、轻量。</p><p>　　（3）、SOA架构中可能数据库存储会发生共享，微服务强调每个服务都有独立数据库，保证每个服务于服务之间互不影响。</p><p>　　（4）、项目体现特征，微服务架构比SOA架构更加适合于互联网公司的敏捷开发、快速迭代版本。</p><h4 id="1-2-2-SpringCloud简介"><a href="#1-2-2-SpringCloud简介" class="headerlink" title="1.2.2 SpringCloud简介"></a>1.2.2 SpringCloud简介</h4><p>SpringCloud介绍</p><p>Spring Cloud 是一系列框架的有序集合，它利用 Spring Boot  的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用 Spring  Boot 的开发风格做到一键启动和部署。</p><p>Spring 并没有重复制造轮子，它只是将目前各家公司开发的比较成熟、经得起实际考验的服务框架组合起来，通过 Spring Boot 风格进行再封装、屏蔽掉了复杂的配置和实现原理，最终给开发者留出了一套简单易懂、易部署和易维护的分布式系统开发工具包。</p><p>SpringCloud包含众多的子项目：</p><ul><li>服务发现——Netflix Eureka</li><li>客服端负载均衡——Netflix Ribbon</li><li>断路器——Netflix Hystrix</li><li>服务网关——Netflix Zuul</li><li>分布式配置——Spring Cloud Config</li></ul><h4 id="1-2-3-微服务-Spring-Boot-Spring-Cloud-三者之间的关系"><a href="#1-2-3-微服务-Spring-Boot-Spring-Cloud-三者之间的关系" class="headerlink" title="1.2.3 微服务 Spring Boot Spring Cloud 三者之间的关系"></a>1.2.3 微服务 Spring Boot Spring Cloud 三者之间的关系</h4><p>微服务是一种架构的理念，提出了微服务的设计原则，从理论为具体的技术落地提供了指导思想。</p><p>Spring Boot 是一套快速配置脚手架，可以基于 Spring Boot 快速开发单个微服务。</p><p>Spring Cloud 是一个基于 Spring Boot 实现的服务治理工具包;</p><p>Spring Boot 专注于快速、方便集成的单个微服务个体;</p><p>Spring Cloud 关注全局的服务治理框架。</p><h3 id="1-3-小结"><a href="#1-3-小结" class="headerlink" title="1.3 小结"></a>1.3 小结</h3><ul><li>微服务架构：就是将相关的功能独立出来，单独创建一个项目，并且连数据库也独立出来，单独创建对应的数据库。本质：将相关独立的业务完全独立出来，对应的工程和数据库也完全独立出来。</li><li>Spring Cloud本身也是基于SpringBoot开发而来，SpringCloud是一系列框架的有序集合,也是把非常流行的微服务的技术整合到一起。</li></ul><h2 id="二、服务调用方式"><a href="#二、服务调用方式" class="headerlink" title="二、服务调用方式"></a>二、服务调用方式</h2><h3 id="2-1-目标"><a href="#2-1-目标" class="headerlink" title="2.1 目标"></a>2.1 目标</h3><ul><li>理解RPC和HTTP的区别</li><li>能使用RestTemplate发送请求(发送Http请求)</li></ul><h3 id="2-2-讲解"><a href="#2-2-讲解" class="headerlink" title="2.2 讲解"></a>2.2 讲解</h3><h4 id="2-2-1-RPC和HTTP区别"><a href="#2-2-1-RPC和HTTP区别" class="headerlink" title="2.2.1 RPC和HTTP区别"></a>2.2.1 RPC和HTTP区别</h4><p>什么是RPC呢？百度百科给出的解释是这样的：“RPC（Remote Procedure Call Protocol）——远程过程调用协议，它是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议”。</p><p><strong>01、所属类别不同</strong></p><p>HTTP。其因为简单、扩展性强的特点而广受开发者的青睐。</p><p>而RPC 呢，是 Remote Procedure Call Protocol 的简写，中文描述是远程过程调用，它可以实现客户端像调用本地服务(方法)一样调用服务器的服务(方法)。</p><p>而 RPC 可以基于 TCP/UDP，也可以基于 HTTP 协议进行传输的 协议。</p><p><strong>02、使用方式不同</strong></p><p>从使用上来看，HTTP 接口只关注服务提供方，对于客户端怎么调用并不关心。接口只要保证有客户端调用时，返回对应的数据就行了。而RPC则要求客户端接口保持和服务端的一致。</p><p>HTTP 是服务端把方法写好，客户端并不知道具体方法。客户端只想获取资源，所以发起HTTP请求，而服务端接收到请求后根据URI经过一系列的路由才定位到方法上面去</p><p>RPC是服务端提供好方法给客户端调用，客户端需要知道服务端的具体类，具体方法，然后像调用本地方法一样直接调用它。</p><p><strong>03、面向对象不同</strong></p><p>从设计上来看，RPC，所谓的远程过程调用 ，是面向方法的 ，HTTP ：是面向资源的</p><p><strong>04、序列化协议不同</strong></p><p>通信协议，上面已经提及了，HTTP 是 基于 HTTP 协议，而 RPC 可以基于 TCP/UDP，也可以基于 HTTP 协议进行传输的。</p><p><strong>05、从性能角度看</strong></p><p>由于HTTP本身提供了丰富的状态功能与扩展功能，但也正由于HTTP提供的功能过多，导致在网络传输时，需要携带的信息更多，从性能角度上讲，较为低效。而RPC服务网络传输上仅传输与业务内容相关的数据，传输数据更小，性能更高。</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2021/06/22/hello-world/"/>
+      <url>/2021/06/22/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
