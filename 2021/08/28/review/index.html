@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      11.8k 字
+      13.3k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      130
+      146
        分钟
     </span>
   
@@ -228,7 +228,7 @@
             <h1 style="display: none">review</h1>
             
             <div class="markdown-body">
-              <h1 id="复习总结"><a href="#复习总结" class="headerlink" title="复习总结"></a>复习总结</h1><h1 id="1-java基础"><a href="#1-java基础" class="headerlink" title="1. java基础"></a>1. java基础</h1><ul>
+              <h1 id="复习笔记"><a href="#复习笔记" class="headerlink" title="复习笔记"></a>复习笔记</h1><h1 id="1-java基础"><a href="#1-java基础" class="headerlink" title="1. java基础"></a>1. java基础</h1><ul>
 <li><p>面向对象?<br>这里的<strong>对象</strong>泛指现实中一切事物，每种事物都具备自己的<strong>属性</strong>和<strong>行为</strong>。<strong>面向对象思想就是在计算机程序设计过程中，参照现实中事物，将事物的属性特征、行为特征抽象出来，描述成计算机事件的设计思想</strong>。<br>三大特征：封装继承多态</p>
 </li>
 <li><p>8种数据类型</p>
@@ -355,6 +355,17 @@
 <p>题目：可不可以自己写个String类(也是自定义的String为何没加载到？) </p>
 <p>不可以。因为在类加载中，会根据双亲委派机制去寻找当前java.lang.String是否已被加载。由于启动类加载器已在启动时候加载了所以不会再次加载，因此使用的String是已在java核心类库加载过的String，而不是新定义的String。</p>
 </li>
+<li><p>Java中的异常分类<br>Throwable -&gt; Error,Exception</p>
+<p>Error:严重问题，例如内存溢出</p>
+<p>Exception -&gt;运行时异常： RuntimeException，编译时异常</p>
+</li>
+<li><p>List的扩容步骤</p>
+<p>分两步：</p>
+<p>1.扩容: 把原来的数组复制到另一个内存空间更大的数组中</p>
+<p>2.添加元素: 把新元素添加到扩容以后的数组中</p>
+</li>
+<li><p>HashMap的扩容</p>
+</li>
 </ul>
 <h1 id="2-Mybatis"><a href="#2-Mybatis" class="headerlink" title="2. Mybatis"></a>2. Mybatis</h1><ul>
 <li><p>工作流程<br><img src="https://blog-1306562150.cos.ap-guangzhou.myqcloud.com/review/total-review/img007.png" srcset="/img/loading.gif" lazyload></p>
@@ -380,6 +391,28 @@
 <p>Mybatis在处理#{}时，会将sql中的#{}替换为?号，调用PreparedStatement的set方法来赋值；</p>
 <p>Mybatis在处理${}时，就是把${}替换成变量的值。</p>
 <p>使用#{}可以有效的防止SQL注入，提高系统安全性。</p>
+</li>
+<li><p><strong>resultMap和resultType有什么区别</strong><br>在MyBatis进行查询映射时，其实查询出来的每一个属性都是放在一个对应的Map里面的，其中键是属性名，值则是其对应的值。<br>①当提供的返回类型属性是resultType时，MyBatis会将Map里面的键值对取出赋给resultType所指定的对象对应的属性。所以其实MyBatis的每一个查询映射的返回类型都是ResultMap，只是当提供的返回类型属性是resultType的时候，MyBatis对自动的给把对应的值赋给resultType所指定对象的属性。<br>②当提供的返回类型是resultMap时，因为Map不能很好表示领域模型，就需要自己再进一步的把它转化为对应的对象，这常常在复杂查询中很有作用。</p>
+<p>ResultType：<br> MyBatis会自动创建一个ResultMap对象，然后基于查找出来的属性名进行键值对封装，然后再看到返回类型是Blog对象，再从ResultMap中取出与Blog对象对应的键值对进行赋值。</p>
+<p>resultMap：<br>select映射中resultMap的值是一个外部resultMap的id，表示返回结果映射到哪一个resultMap上，外部resultMap的type属性表示该resultMap的结果是一个什么样的类型，这里是Blog类型，那么MyBatis就会把它当作一个Blog对象取出。resultMap节点的子节点id是用于标识该对象的id的，而result子节点则是用于标识一些简单属性的，其中的Column属性表示从数据库中查询的属性，Property则表示查询出来的属性对应的值赋给实体对象的哪个属性。</p>
+<p>区别：</p>
+<p>一、对象不同</p>
+<p>1、resultmap：resultMap如果查询出来的列名和pojo的属性名不一致，通过定义一个resultMap对列名和pojo属性名之间作一个映射关系。</p>
+<p>2、resulttype：resultType使用resultType进行输出映射，只有查询出来的列名和pojo中的属性名一致，该列才可以映射成功。</p>
+<p>二、描述不同</p>
+<p>1、resultmap：resultMap对于一对一表连接的处理方式通常为在主表的pojo中添加嵌套另一个表的pojo，然后在mapper.xml中采用association节点元素进行对另一个表的连接处理。</p>
+<p>2、resulttype：resultType无法查询结果映射到pojo对象的pojo属性中，根据对结构集查询遍历的需要选择使用resultType还是resultMap。</p>
+<p>三、类型适用不同</p>
+<p>1、resultmap：mybatis中在查询进行select映射的时候，返回类型可以用resultType，也可以用resultMap。</p>
+<p>2、resulttype：resultType是直接表示返回类型的,而resultMap则是对外部ResultMap的引用，但是resultType跟resultMap不能同时存在。</p>
+</li>
+<li><p>Mybatis常用标签</p>
+</li>
+<li><p><strong>mybatis如何处理多参数的</strong><br>Mybatis多参数传递入参四种处理方式</p>
+<p>1.利用参数出现的顺序</p>
+<p>2.使用注解需要使用到mybatis @Param注解</p>
+<p>3.使用map 需要map的键和#{内容}里面的内容一致</p>
+<p>4.把参数封装在Javabean中</p>
 </li>
 <li><p>JPA框架(了解)</p>
 </li>
@@ -468,19 +501,28 @@
 <li>springboot的启动类的启动流程是怎样的?</li>
 </ul>
 <h1 id="7-springcloud"><a href="#7-springcloud" class="headerlink" title="7. springcloud"></a>7. springcloud</h1><ul>
-<li>Http与RPC的区别?</li>
-<li>Eureka工作原理?</li>
-<li>Dubbo工作原理?</li>
-<li>常见用的负载均衡策略有哪些?</li>
-<li>熔断器<ul>
+<li><p>Http与RPC的区别?<br>RPC（Remote Procedure Call Protocol）——远程过程调用协议，它是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议。</p>
+</li>
+<li><p>Eureka工作原理?</p>
+</li>
+<li><p>Dubbo工作原理?</p>
+</li>
+<li><p>常见用的负载均衡策略有哪些?</p>
+</li>
+<li><p>熔断器</p>
+<ul>
 <li>三个状态,如何变化?</li>
 <li>线程隔离 熔断降级</li>
 </ul>
 </li>
-<li>Feign的使用?feign使用的网络协议是哪个?RestTemplate</li>
-<li>网关,全局过滤器的自定义</li>
-<li>配置中心</li>
-<li>springcloud有哪些组件?怎么用的?</li>
+<li><p>Feign的使用?feign使用的网络协议是哪个?RestTemplate</p>
+</li>
+<li><p>网关,全局过滤器的自定义</p>
+</li>
+<li><p>配置中心</p>
+</li>
+<li><p>springcloud有哪些组件?怎么用的?</p>
+</li>
 </ul>
 <h1 id="8-ElasticSearch"><a href="#8-ElasticSearch" class="headerlink" title="8. ElasticSearch"></a>8. ElasticSearch</h1><ul>
 <li>顺序扫描法 倒排索引</li>
@@ -1037,7 +1079,23 @@
 <p><img src="https://blog-1306562150.cos.ap-guangzhou.myqcloud.com/review/day01/0100c848410a45f390122ea6ddba2faf.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 </ol>
-<h1 id="拓展-amp-总结-面试点"><a href="#拓展-amp-总结-面试点" class="headerlink" title="拓展&amp;总结(面试点)"></a>拓展&amp;总结(面试点)</h1><h4 id="1-1-java8中接口和抽象类的区别"><a href="#1-1-java8中接口和抽象类的区别" class="headerlink" title="1.1 java8中接口和抽象类的区别"></a><strong>1.1 java8中接口和抽象类的区别</strong></h4><p><strong>相同点：</strong></p>
+<h1 id="17-数据结构"><a href="#17-数据结构" class="headerlink" title="17. 数据结构"></a>17. 数据结构</h1><ul>
+<li>基本数据类型 包装数据类型</li>
+<li>指针是什么?</li>
+<li>单向链表结构 双向链表结构</li>
+<li>普通二叉树 平衡二叉树 完全二叉树 满二叉</li>
+<li>B树和B+树</li>
+<li>前缀树 后缀树 </li>
+<li>跳表</li>
+<li>前序 中序 后序</li>
+<li>补码 反码 原码</li>
+<li>冒泡手写</li>
+<li>快排手写</li>
+<li>了解什么是堆排序</li>
+<li>正态分布的随机算法</li>
+</ul>
+<h1 id="18-拓展项目"><a href="#18-拓展项目" class="headerlink" title="18. 拓展项目"></a>18. 拓展项目</h1><p>完整电商项目:<a target="_blank" rel="noopener" href="https://github.com/macrozheng/mall">https://github.com/macrozheng/mall</a><br>秒杀项目:<a target="_blank" rel="noopener" href="https://github.com/qiurunze123/miaosha">https://github.com/qiurunze123/miaosha</a><br>运维监控项目:<a target="_blank" rel="noopener" href="https://github.com/xkcoding/spring-boot-demo">https://github.com/xkcoding/spring-boot-demo</a></p>
+<h1 id="拓展-amp-总结-面试点"><a href="#拓展-amp-总结-面试点" class="headerlink" title="拓展&amp;总结(面试点)"></a>拓展&amp;总结(面试点)</h1><h4 id="1-java8中接口和抽象类的区别"><a href="#1-java8中接口和抽象类的区别" class="headerlink" title="1. java8中接口和抽象类的区别"></a><strong>1. java8中接口和抽象类的区别</strong></h4><p><strong>相同点：</strong></p>
 <ol>
 <li>都是抽象类型</li>
 <li>都可以有实现方法（以前接口不行）</li>
@@ -1050,7 +1108,7 @@
 <li>接口中定义的变量默认是public static final 型，且必须给其<strong>初值</strong>，所以实现类中<strong>不能重新定义</strong>，也不<strong>能改变其值</strong>；抽象类中的变量默认是 default 型，其值可以在子类中重新定义，也可以重新赋值</li>
 </ol>
 <p><strong>总结：默认方法给予我们修改接口而不破坏原来的实现类的结构提供了便利，目前java 8的集合框架已经大量使用了默认方法来改进了</strong></p>
-<h4 id="1-2-volatile和synchronized关键字的区别"><a href="#1-2-volatile和synchronized关键字的区别" class="headerlink" title="1.2 volatile和synchronized关键字的区别"></a>1.2 volatile和synchronized关键字的区别</h4><table>
+<h4 id="2-volatile和synchronized关键字的区别"><a href="#2-volatile和synchronized关键字的区别" class="headerlink" title="2. volatile和synchronized关键字的区别"></a>2. volatile和synchronized关键字的区别</h4><table>
 <thead>
 <tr>
 <th>volatile</th>
@@ -1078,24 +1136,20 @@
 <td>synchronized标记的变量可以被编译器优化</td>
 </tr>
 </tbody></table>
-<h4 id="1-3-悲观锁-乐观锁"><a href="#1-3-悲观锁-乐观锁" class="headerlink" title="1.3 悲观锁/乐观锁"></a>1.3 悲观锁/乐观锁</h4><p>一种思想, java中JUC.atomic下的类, 底层CAS就是乐观锁的一种实现, 默认数据不会改变, 心比较乐观;<br>synchronized | ReentrantLock 就是悲观锁的一种实现, 比较悲观, 每次都认为其他人会改变数据, 所以加锁不让其他人操作, 整个数据处理过程只能自己操作</p>
+<h4 id="3-悲观锁-乐观锁"><a href="#3-悲观锁-乐观锁" class="headerlink" title="3. 悲观锁/乐观锁"></a>3. 悲观锁/乐观锁</h4><p>一种思想, java中JUC.atomic下的类, 底层CAS就是乐观锁的一种实现, 默认数据不会改变, 心比较乐观;<br>synchronized | ReentrantLock 就是悲观锁的一种实现, 比较悲观, 每次都认为其他人会改变数据, 所以加锁不让其他人操作, 整个数据处理过程只能自己操作</p>
 <p>乐观锁比较适用于读多写少的情况(多读场景)<br>悲观锁比较适用于写多读少的情况(多写场景)</p>
-<h1 id="17-数据结构"><a href="#17-数据结构" class="headerlink" title="17. 数据结构"></a>17. 数据结构</h1><ul>
-<li>基本数据类型 包装数据类型</li>
-<li>指针是什么?</li>
-<li>单向链表结构 双向链表结构</li>
-<li>普通二叉树 平衡二叉树 完全二叉树 满二叉</li>
-<li>B树和B+树</li>
-<li>前缀树 后缀树 </li>
-<li>跳表</li>
-<li>前序 中序 后序</li>
-<li>补码 反码 原码</li>
-<li>冒泡手写</li>
-<li>快排手写</li>
-<li>了解什么是堆排序</li>
-<li>正态分布的随机算法</li>
-</ul>
-<h1 id="18-拓展项目"><a href="#18-拓展项目" class="headerlink" title="18. 拓展项目"></a>18. 拓展项目</h1><p>完整电商项目:<a target="_blank" rel="noopener" href="https://github.com/macrozheng/mall">https://github.com/macrozheng/mall</a><br>秒杀项目:<a target="_blank" rel="noopener" href="https://github.com/qiurunze123/miaosha">https://github.com/qiurunze123/miaosha</a><br>运维监控项目:<a target="_blank" rel="noopener" href="https://github.com/xkcoding/spring-boot-demo">https://github.com/xkcoding/spring-boot-demo</a></p>
+<h4 id="4-Java常用设计模式"><a href="#4-Java常用设计模式" class="headerlink" title="4.Java常用设计模式"></a>4.Java常用设计模式</h4><p>4.1 单例模式</p>
+<p>保证一个类仅有一个实例并提供一个全局访问点，如一些配置文件或者管理类可以设计为单例，常用的线程池也是单例。<br><strong>例子：</strong><br> 建议采用 饿汉式 创建方法。线程安全，容易实现。初始化慢一点。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SingleObject</span></span>&#123;<br>    <span class="hljs-comment">// 创建SingleObject的一个对象</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> SingleObject instance = <span class="hljs-keyword">new</span> SingleObject();<br>    <span class="hljs-comment">// 让构造函数为private,这样该类就不会实例化</span><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">SingleObject</span><span class="hljs-params">()</span></span>&#123;&#125;<br>    <span class="hljs-comment">// 获取唯一可用的对象</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-title">SingleObject</span><span class="hljs-params">()</span> <span class="hljs-title">getInstance</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">return</span> instance;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<p>4.2 工厂模式<br><strong>定义与使用场合</strong>：现在需要<strong>创建几个对象</strong>，且<strong>这几个对象有共同特征</strong>，则不需要具体创建各个对象，而是<strong>创建对象工厂类</strong>即可。<br> 一般常用静态工厂模式。<br><strong>例子：</strong>发送邮件和短信（共同特征：发送的消息） </p>
+<p>4.3 抽象工厂模式</p>
+<p>工厂方法模式有一个问题就是，类的创建依赖工厂类，也就是说，<strong>如果想要拓展程序，必须对工厂类进行修改，这违背了闭包原则</strong>。<br><strong>定义与使用场景：</strong>同上。<br><strong>例子：</strong>同上。 </p>
+<p><strong>总结：</strong>如果要新增发送微信，则只需做一个实现类，实现Sender接口，同时做一个工厂类，实现Provider接口，就OK了，无需去改动现成的代码。这样做，拓展性较好！<br><strong>所有工厂模式中，抽象工厂模式最先进。</strong></p>
+<p>4.3 代理模式</p>
+<p><strong>定义与使用场景：</strong>一个代理类代表一个真实类的功能，通过访问代理类来实现对真实类的访问。<br> 比如买火车票这件小事：黄牛相当于是火车站的代理，我们可以通过黄牛买票，但只能去火车站进行改签和退票。<br> 又比如需要对原有的方法进行修改，就是采用一个代理类调用原有的方法，以避免修改原有代码。 </p>
+<p>一个真实对象realSubject提供一个代理对象proxy。<strong>通过proxy可以调用realSubject的部分功能</strong>，并添加一些额外的业务处理*，同时可以屏蔽realSubject中未开放的接口。<br> 1、RealSubject 是委托类，Proxy 是代理类；<br> 2、Subject 是委托类和代理类的接口；<br> 3、request() 是委托类和代理类的共同方法；</p>
 
             </div>
             <hr>
@@ -1117,6 +1171,12 @@
                     
                       <a class="hover-with-bg" href="/tags/java/">java</a>
                     
+                      <a class="hover-with-bg" href="/tags/Spring/">Spring</a>
+                    
+                      <a class="hover-with-bg" href="/tags/SpringMVC/">SpringMVC</a>
+                    
+                      <a class="hover-with-bg" href="/tags/SpringBoot/">SpringBoot</a>
+                    
                   </div>
                 
               </div>
@@ -1131,6 +1191,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/08/31/ji-suan-ji-wang-luo/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">计算机网络</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

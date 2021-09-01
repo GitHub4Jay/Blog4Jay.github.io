@@ -1,0 +1,570 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Jay">
+  <meta name="keywords" content="">
+  
+  <title>Redis - Jay&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Fluid</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Redis">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-09-01 20:15" pubdate>
+        2021年9月1日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      45
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Redis</h1>
+            
+            <div class="markdown-body">
+              <h2 id="1、简单介绍一下redis？"><a href="#1、简单介绍一下redis？" class="headerlink" title="1、简单介绍一下redis？"></a>1、简单介绍一下redis？</h2><p>（1）redis是一个key-value类型的非关系型数据库，基于内存也可持久化的数据库，相对于关系型数据库（数据主要存在硬盘中），性能高，因此我们一般用redis来做缓存使用；并且redis支持丰富的数据类型，比较容易解决各种问题</p>
+<p>（2）Redis的Value支持5种数据类型，string、hash、list、set、zset（sorted set）; </p>
+<p>​      String类型是最简单的类型，一个key对应一个value，项目中我们主要利用单点登录中的用户信息用string类型来存储； </p>
+<p>​     Hash类型中的key是string类型，value又相当于一个map（key-value），针对这种数据特性，比较适合存储对象，在我们项目中由于购物车是用redis来存储的，因为选择redis的散列（hash）来存储；{key:{filed:value}{filed:value}{filed:value}}</p>
+<p>​     List类型是按照插入顺序的字符串链表（双向链表），主要命令是LPUSH和RPUSH，能够支持反向查找和遍历，如果使用的话主要存储商品评论列表，key是该商品的ID，value是商品评论信息列表，秒杀的使用；</p>
+<p>​     Set类型是用哈希表类型的字符串序列，没有顺序，集合成员是唯一的，没有重复数据。</p>
+<p>我们的电商项目中没有用到这个数据类型。这个应用场景一般存储一个列表数据，但列表里面又不希望出现重复数据，比如微博应用中，可以将一个用户所有关注的对象放在一个集合中，将其所有粉丝存在一个集合，这样我们就可以实现两个人的共同好友、共同关注等需求；</p>
+<p>zset（sorted set）类型和set类型基本是一致的，不同的是zset这种类型会给每个元素关联一个<strong>double</strong>类型的分数（score），这样就可以为成员排序，并且插入是有序的。这种数据类型如果使用的话主要用来统计商品的销售排行榜，比如：items:sellsort 10 1001 20 1002 这个代表编号是1001的商品销售数量为10,编号为1002的商品销售数量为20。</p>
+<h2 id="2、Redis在你们项目中是怎么用的？"><a href="#2、Redis在你们项目中是怎么用的？" class="headerlink" title="2、Redis在你们项目中是怎么用的？"></a>2、Redis在你们项目中是怎么用的？</h2><p>商品详情中的数据放入缓存，价格是实时获取的；</p>
+<p>（1）单点登录系统中也用到了redis。因为我们是微服务系统，把用户信息存到redis中便于多系统之间获取共用数据；</p>
+<p>（2）我们项目中同时也将购物车的信息设计存储在redis中，用户未登录采用UUID作为Key，value是购物车对象；用户登录之后将商品添加到购物车后存储到redis中，key是用户id，value是购物车对象；</p>
+<p>（3）因为针对评论这块，我们需要一个商品对应多个用户评论，并且按照时间顺序显示评论，为了提高查询效率，因此我们选择了redis的list类型将商品评论放在缓存中；</p>
+<p>（4）在统计模块中，我们有个功能是做商品销售的排行榜，因此选择redis的zset结构来实现；</p>
+<p>还有一些其他的应用场景，主要就是用来作为缓存使用。</p>
+<h2 id="3、对redis的持久化了解不？"><a href="#3、对redis的持久化了解不？" class="headerlink" title="3、对redis的持久化了解不？"></a>3、对redis的持久化了解不？</h2><p>​       Redis是内存型数据库，同时它也可以持久化到硬盘中，redis的持久化方式有两种：</p>
+<p>（1）RDB（半持久化方式）：</p>
+<p>按照配置不定期的通过异步的方式、快照的形式直接把内存中的数据持久化到磁盘的一个dump.rdb文件（二进制文件）中；</p>
+<p>这种方式是redis默认的持久化方式，它在配置文件（redis.conf）中的格式是：save N M，表示的是在N秒之内发生M次修改，则redis抓快照到磁盘中；</p>
+<p>Save X Y   fork 子线程  共享内存   写时复制  CopyOnWriteArrayList</p>
+<p>​       优点：只包含一个文件，对于文件备份、灾难恢复而言，比较实用。因为我们可以轻松的将一个单独的文件转移到其他存储媒介上；性能最大化，因为对于这种半持久化方式，使用的是写时拷贝技术，可以极大的避免服务进程执行IO操作；相对于AOF来说，如果数据集很大，RDB的启动效率就会很高</p>
+<p>​     缺点：如果想保证数据的高可用（最大限度的包装数据丢失），那么RDB这种半持久化方式不是一个很好的选择，因为系统一旦在持久化策略之前出现宕机现象，此前没有来得及持久化的数据将会产生丢失；rdb是通过fork进程来协助完成持久化的，因此当数据集较大的时候，我们就需要等待服务器停止几百毫秒甚至一秒；</p>
+<p>（2）AOF（全持久化的方式） 写后日志</p>
+<p>​    把每一次数据变化都通过write()函数将你所执行的命令追加到一个appendonly.aof文件里面；</p>
+<p>​    Redis默认是不支持这种全持久化方式的，需要将no改成yes                                                  </p>
+<p>实现文件刷新的三种方式：</p>
+<p>no:不会自动同步到磁盘上，需要依靠OS（操作系统）进行刷新，效率快，但是安全性就比较差；</p>
+<p>always:每提交一个命令都调用同步刷新到aof文件，非常慢，但是安全；</p>
+<p>everysec:每秒钟都调用fsync刷新到aof文件中，很快，但是可能丢失一秒内的数据，推荐使用，兼顾了速度和安全；</p>
+<p>优点：</p>
+<p>​    数据安全性高</p>
+<p>​    该机制对日志文件的写入操作采用的是append模式，因此在写入过程中即使出现宕机问题，也不会破坏日志文件中已经存在的内容；</p>
+<p>AOF重写机制</p>
+<p>缺点：</p>
+<p>对于数量相同的数据集来说，aof文件通常要比rdb文件大，因此rdb在恢复大数据集时的速度大于AOF；</p>
+<p>根据同步策略的不同，AOF在运行效率上往往慢于RDB，每秒同步策略的效率是比较高的，同步禁用策略的效率和RDB一样高效；</p>
+<p>针对以上两种不同的持久化方式，如果缓存数据安全性要求比较高的话，用aof这种持久化方式（比如项目中的购物车）；如果对于大数据集要求效率高的话，就可以使用默认的。而且这两种持久化方式可以同时使用。  </p>
+<p>Redis 4.0 </p>
+<p>Slaveof ip port</p>
+<p>Slaveof  replicof ip port </p>
+<p>监控   选主  通知</p>
+<h2 id="4、做过redis的集群吗？你们做集群的时候搭建了几台，都是怎么搭建的？"><a href="#4、做过redis的集群吗？你们做集群的时候搭建了几台，都是怎么搭建的？" class="headerlink" title="4、做过redis的集群吗？你们做集群的时候搭建了几台，都是怎么搭建的？"></a>4、做过redis的集群吗？你们做集群的时候搭建了几台，都是怎么搭建的？</h2><p>切片集群</p>
+<p>Codis proxy </p>
+<p>Redis Cluster   </p>
+<p>Hash槽  16384哈希槽  槽和实例</p>
+<p>针对这类问题，我们首先考虑的是为什么要搭建集群？（这个需要针对我们的项目来说）</p>
+<p>Redis的数据是存放在内存中的，这就意味着redis不适合存储大数据，大数据存储一般公司常用hadoop中的Hbase或者MogoDB。因此redis主要用来处理高并发的，用我们的项目来说，电商项目如果并发大的话，一台单独的redis是不能足够支持我们的并发，这就需要我们扩展多台设备协同合作，即用到集群。</p>
+<p>Redis搭建集群的方式有多种， redis3.0之后就支持redis-cluster集群，这种方式采用的是无中心结构，每个节点保存数据和整个集群的状态，每个节点都和其他所有节点连接。如果使用的话就用redis-cluster集群。</p>
+<p>集群这块直接说是公司运维搭建的，小公司的话也有可能由我们自己搭建，开发环境我们也可以直接用单机版的。但是可以了解一下redis的集群版。搭建redis集群的时候，对于用到多少台服务器，每家公司都不一样，大家针对自己项目的大小去衡量。举个简单的例子：</p>
+<p>我们项目中redis集群主要搭建了6台，3主（为了保证redis的投票机制）3从（高可用），每个主服务器都有一个从服务器，作为备份机。</p>
+<p>【扩展】</p>
+<p>1、架构图如下：</p>
+<p>（1）所有的节点都通过PING-PONG机制彼此互相连接；</p>
+<p>（2）每个节点的fail是通过集群中超过半数的节点检测失效时才生效；</p>
+<p>（3）客户端与redis集群连接，只需要连接集群中的任何一个节点即可；</p>
+<p>（4）Redis-cluster把所有的物理节点映射到【0-16383】slot上，负责维护</p>
+<p>2、容错机制（投票机制）</p>
+<p>（1）选举过程是集群中的所有master都参与，如果半数以上master节点与故障节点连接超过时间，则认为该节点故障，自动会触发故障转移操作；</p>
+<p>图中描述的是六个redis实例构成的集群</p>
+<p>6379端口为客户端通讯端口</p>
+<p>16379端口为集群总线端口</p>
+<p>集群内部划分为16384个数据分槽，分布在三个主redis中。</p>
+<p>从redis中没有分槽，不会参与集群投票，也不会帮忙加快读取数据，仅仅作为主机的备份。</p>
+<p>三个主节点中平均分布着16384数据分槽的三分之一，每个节点中不会存有有重复数据，仅仅有自己的从机帮忙冗余。</p>
+<p>（2）集群不可用？</p>
+<p>​     a:如果集群任意master挂掉，并且当前的master没有slave，集群就会fail;</p>
+<p>​     b:如果集群超过半数以上master挂掉，无论是否有slave，整个集群都会fail;</p>
+<h2 id="5、redis的哨兵机制（redis2-6以后出现的）"><a href="#5、redis的哨兵机制（redis2-6以后出现的）" class="headerlink" title="5、redis的哨兵机制（redis2.6以后出现的）"></a>5、redis的哨兵机制（redis2.6以后出现的）</h2><p>哨兵机制： </p>
+<p>监控、选主、通知 </p>
+<p>误判</p>
+<p>监控：监控主数据库和从数据库是否正常运行；</p>
+<p>提醒：当被监控的某个redis出现问题的时候，哨兵可以通过API向管理员或者其他应用程序发送通知；</p>
+<p>自动故障迁移：主数据库出现故障时，可以自动将从数据库转化为主数据库，实现自动切换；</p>
+<p>具体的配置步骤面试中可以说参考的网上的文档。要注意的是，如果master主服务器设置了密码，记得在哨兵的配置文件（sentinel.conf）里面也要配置访问密码</p>
+<h2 id="6、redis的安全机制（你们公司redis的安全这方面怎么考虑的？）"><a href="#6、redis的安全机制（你们公司redis的安全这方面怎么考虑的？）" class="headerlink" title="6、redis的安全机制（你们公司redis的安全这方面怎么考虑的？）"></a>6、redis的安全机制（你们公司redis的安全这方面怎么考虑的？）</h2><p>漏洞介绍：redis默认情况下，会绑定在bind 0.0.0.0:6379，这样就会将redis的服务暴露到公网上，如果在没有开启认证的情况下，可以导致任意用户在访问目标服务器的情况下未授权访问redis以及读取redis的数据，攻击者就可以在未授权访问redis的情况下可以利用redis的相关方法，成功在redis服务器上写入公钥，进而可以直接使用私钥进行直接登录目标主机；</p>
+<p>比如：可以使用FLUSHALL方法，整个redis数据库将被清空</p>
+<p>解决方案：</p>
+<p>（1）禁止一些高危命令。修改redis.conf文件，用来禁止远程修改DB文件地址，比如 rename-command FLUSHALL “” 、rename-command CONFIG”” 、rename-command EVAL “”等；</p>
+<p>（2）为redis添加密码验证。修改redis.conf文件，添加requirepass mypassword；</p>
+<p>（3）禁止外网访问redis。修改redis.conf文件，添加或修改 bind 127.0.0.1，使得redis服务只在当前主机使用；</p>
+<h2 id="二、缓存存在的问题与解决"><a href="#二、缓存存在的问题与解决" class="headerlink" title="二、缓存存在的问题与解决"></a>二、缓存存在的问题与解决</h2><h2 id="1、缓存穿透"><a href="#1、缓存穿透" class="headerlink" title="1、缓存穿透"></a>1、缓存穿透</h2><p>是指查询一个不存在的数据，由于缓存无法命中，将去查询数据库，但是数据库也无此记录，并且出于容错考虑，我们没有将这次查询的null写入缓存，这将导致这个不存在的数据每次请求都要到存储层去查询，失去了缓存的意义。在流量大时，可能DB就挂掉了，要是有人利用不存在的key频繁攻击我们的应用，这就是漏洞。</p>
+<p><strong>解决：</strong>空结果也进行缓存，但它的过期时间会很短，最长不超过五分钟。</p>
+<p>Bloom过滤器</p>
+<h2 id="2、缓存雪崩"><a href="#2、缓存雪崩" class="headerlink" title="2、缓存雪崩"></a>2、缓存雪崩</h2><p>是指在我们设置缓存时采用了相同的过期时间，导致缓存在某一时刻同时失效，请求全部转发到DB，DB瞬时压力过重雪崩。</p>
+<p><strong>解决：</strong>原有的失效时间基础上增加一个随机值，比如1-5分钟随机，这样每一个缓存的过期时间的重复率就会降低，就很难引发集体失效的事件。</p>
+<h2 id="3、缓存击穿"><a href="#3、缓存击穿" class="headerlink" title="3、缓存击穿"></a>3、缓存击穿</h2><p>是指对于一些设置了过期时间的key，如果这些key可能会在某些时间点被超高并发地访问，是一种非常“热点”的数据。这个时候，需要考虑一个问题：如果这个key在大量请求同时进来之前正好失效，那么所有对这个key的数据查询都落到db，我们称为缓存击穿。</p>
+<p><strong>与缓存雪崩的区别</strong>：</p>
+<ol>
+<li><p>击穿是一个热点key失效</p>
+</li>
+<li><p>雪崩是很多key集体失效</p>
+</li>
+</ol>
+<p><strong>解决方案：</strong></p>
+<p>随着业务发展的需要，原单体单机部署的系统被演化成分布式集群系统后，由于分布式系统多线程、多进程并且分布在不同机器上，这将使原单机部署情况下的并发控制锁策略失效，单纯的Java API并不能提供分布式锁的能力。为了解决这个问题就需要一种跨JVM的互斥机制来控制共享资源的访问，这就是分布式锁要解决的问题！</p>
+<p>使用<strong>1</strong>，采用redis的KEY过期时间实现</p>
+<p>Redis:命令</p>
+<p># set skuid:1:info “OK” NX PX 10000</p>
+<p>EX second ：设置键的过期时间为 second 秒。</p>
+<p>PX millisecond ：设置键的过期时间为 millisecond 毫秒。 </p>
+<p>NX ：只在键(key)不存在时，才对键(key)进行设置操作。</p>
+<p>XX ：只在键(key)已经存在时，才对键(key)进行设置操作。</p>
+<p>Redis SET命令用于设置给定key的值，如果key已经存在其他值，SET就会覆盖，且无视类型。</p>
+<p>在 Redis 2.6.12 以前版本， SET 命令总是返回 OK 。</p>
+<p>从 Redis 2.6.12 版本开始， SET 在设置操作成功完成时，才返回 OK 。</p>
+<p>​                                                  </p>
+<p><strong>问题：</strong>删除操作缺乏原子性。</p>
+<p><strong>场景：</strong></p>
+<p>\1. index1执行删除时，查询到的lock值确实和uuid相等</p>
+<p>\2. index1执行删除前，lock刚好过期时间已到，被redis自动释放</p>
+<p>\3. index2获取了lock</p>
+<p>\4. index1执行删除，此时会把index2的lock删除</p>
+<p><strong>解决：</strong>使用LUA脚本保证删除的原子性</p>
+<p><strong>redis</strong>集群状态下的问题：</p>
+<p>\1. 客户端A从master获取到锁</p>
+<p>\2. 在master将锁同步到slave之前，master宕掉了。</p>
+<p>\3. slave节点被晋级为master节点</p>
+<p>\4. 客户端B取得了同一个资源被客户端A已经获取到的另外一个锁。</p>
+<p>安全失效！</p>
+<p><strong>使用redisson</strong> <strong>解决分布式锁</strong></p>
+<p>​      redisson ： 工具</p>
+<p>​      官方文档地址：<a target="_blank" rel="noopener" href="https://github.com/redisson/redisson/wiki">https://github.com/redisson/redisson/wiki</a></p>
+<p>连接文档：<a target="_blank" rel="noopener" href="https://github.com/redisson/redisson">https://github.com/redisson/redisson</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java">RLock lock = redisson.getLock(<span class="hljs-string">&quot;anyLock&quot;</span>);<br><span class="hljs-comment">// 最常使用</span><br>lock.lock();<br><span class="hljs-comment">// 加锁以后10秒钟自动解锁</span><br><br><span class="hljs-comment">// 无需调用unlock方法手动解锁</span><br><br>lock.lock(<span class="hljs-number">10</span>, TimeUnit.SECONDS);<br><br><span class="hljs-comment">// 尝试加锁，最多等待100秒，上锁以后10秒自动解锁</span><br><br><span class="hljs-keyword">boolean</span> res = lock.tryLock(<span class="hljs-number">100</span>, <span class="hljs-number">10</span>, TimeUnit.SECONDS);<br><br><span class="hljs-keyword">if</span> (res) &#123;<br>   <span class="hljs-keyword">try</span> &#123;<br>     ...<br>   &#125; <span class="hljs-keyword">finally</span> &#123;<br><br>       lock.unlock();<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4、分布式锁-AOP实现缓存"><a href="#4、分布式锁-AOP实现缓存" class="headerlink" title="4、分布式锁 + AOP实现缓存"></a>4、分布式锁 + AOP实现缓存</h2><p>随着业务中缓存及分布式锁的加入，业务代码变的复杂起来，除了需要考虑业务逻辑本身，还要考虑缓存及分布式锁的问题，增加了程序员的工作量及开发难度。而缓存的玩法套路特别类似于事务，而声明式事务就是用了aop的思想实现的。</p>
+<p>持久化节点  Znode</p>
+<p>临时节点</p>
+<p>持久化顺序界定</p>
+<p>临时顺序节点</p>
+<p>以 @Transactional 注解为植入点的切点，这样才能知道@Transactional注解标注的方法需要被代理。</p>
+<p>@Transactional注解的切面逻辑类似于@Around</p>
+<p><strong>模拟事务，缓存可以这样实现：</strong></p>
+<p>\1. 自定义缓存注解@GmallCache（类似于事务@Transactional）</p>
+<p>\2. 编写切面类，使用环绕通知实现缓存的逻辑封装</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Redis/">Redis</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Redis/">Redis</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Redission/">Redission</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/08/31/ji-suan-ji-wang-luo/">
+                        <span class="hidden-mobile">计算机网络</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
