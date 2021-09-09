@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.2k 字
+      3.8k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      45
+      42
        分钟
     </span>
   
@@ -228,21 +228,21 @@
             <h1 style="display: none">Redis</h1>
             
             <div class="markdown-body">
-              <h2 id="1、简单介绍一下redis？"><a href="#1、简单介绍一下redis？" class="headerlink" title="1、简单介绍一下redis？"></a>1、简单介绍一下redis？</h2><p>（1）redis是一个key-value类型的非关系型数据库，基于内存也可持久化的数据库，相对于关系型数据库（数据主要存在硬盘中），性能高，因此我们一般用redis来做缓存使用；并且redis支持丰富的数据类型，比较容易解决各种问题</p>
+              <h2 id="1、redis介绍"><a href="#1、redis介绍" class="headerlink" title="1、redis介绍"></a>1、redis介绍</h2><p>（1）redis是一个key-value类型的非关系型数据库，基于内存也可持久化的数据库，相对于关系型数据库（数据主要存在硬盘中），性能高，因此我们一般用redis来做缓存使用；并且redis支持丰富的数据类型，比较容易解决各种问题</p>
 <p>（2）Redis的Value支持5种数据类型，string、hash、list、set、zset（sorted set）; </p>
 <p>​      String类型是最简单的类型，一个key对应一个value，项目中我们主要利用单点登录中的用户信息用string类型来存储； </p>
 <p>​     Hash类型中的key是string类型，value又相当于一个map（key-value），针对这种数据特性，比较适合存储对象，在我们项目中由于购物车是用redis来存储的，因为选择redis的散列（hash）来存储；{key:{filed:value}{filed:value}{filed:value}}</p>
 <p>​     List类型是按照插入顺序的字符串链表（双向链表），主要命令是LPUSH和RPUSH，能够支持反向查找和遍历，如果使用的话主要存储商品评论列表，key是该商品的ID，value是商品评论信息列表，秒杀的使用；</p>
 <p>​     Set类型是用哈希表类型的字符串序列，没有顺序，集合成员是唯一的，没有重复数据。</p>
-<p>我们的电商项目中没有用到这个数据类型。这个应用场景一般存储一个列表数据，但列表里面又不希望出现重复数据，比如微博应用中，可以将一个用户所有关注的对象放在一个集合中，将其所有粉丝存在一个集合，这样我们就可以实现两个人的共同好友、共同关注等需求；</p>
+<p>这个应用场景一般存储一个列表数据，但列表里面又不希望出现重复数据，比如微博应用中，可以将一个用户所有关注的对象放在一个集合中，将其所有粉丝存在一个集合，这样我们就可以实现两个人的共同好友、共同关注等需求；</p>
 <p>zset（sorted set）类型和set类型基本是一致的，不同的是zset这种类型会给每个元素关联一个<strong>double</strong>类型的分数（score），这样就可以为成员排序，并且插入是有序的。这种数据类型如果使用的话主要用来统计商品的销售排行榜，比如：items:sellsort 10 1001 20 1002 这个代表编号是1001的商品销售数量为10,编号为1002的商品销售数量为20。</p>
-<h2 id="2、Redis在你们项目中是怎么用的？"><a href="#2、Redis在你们项目中是怎么用的？" class="headerlink" title="2、Redis在你们项目中是怎么用的？"></a>2、Redis在你们项目中是怎么用的？</h2><p>商品详情中的数据放入缓存，价格是实时获取的；</p>
+<h2 id="2、Redis使用"><a href="#2、Redis使用" class="headerlink" title="2、Redis使用"></a>2、Redis使用</h2><p>商品详情中的数据放入缓存，价格是实时获取的；</p>
 <p>（1）单点登录系统中也用到了redis。因为我们是微服务系统，把用户信息存到redis中便于多系统之间获取共用数据；</p>
 <p>（2）我们项目中同时也将购物车的信息设计存储在redis中，用户未登录采用UUID作为Key，value是购物车对象；用户登录之后将商品添加到购物车后存储到redis中，key是用户id，value是购物车对象；</p>
 <p>（3）因为针对评论这块，我们需要一个商品对应多个用户评论，并且按照时间顺序显示评论，为了提高查询效率，因此我们选择了redis的list类型将商品评论放在缓存中；</p>
 <p>（4）在统计模块中，我们有个功能是做商品销售的排行榜，因此选择redis的zset结构来实现；</p>
 <p>还有一些其他的应用场景，主要就是用来作为缓存使用。</p>
-<h2 id="3、对redis的持久化了解不？"><a href="#3、对redis的持久化了解不？" class="headerlink" title="3、对redis的持久化了解不？"></a>3、对redis的持久化了解不？</h2><p>​       Redis是内存型数据库，同时它也可以持久化到硬盘中，redis的持久化方式有两种：</p>
+<h2 id="3、redis的持久化"><a href="#3、redis的持久化" class="headerlink" title="3、redis的持久化"></a>3、redis的持久化</h2><p>​       Redis是内存型数据库，同时它也可以持久化到硬盘中，redis的持久化方式有两种：</p>
 <p>（1）RDB（半持久化方式）：</p>
 <p>按照配置不定期的通过异步的方式、快照的形式直接把内存中的数据持久化到磁盘的一个dump.rdb文件（二进制文件）中；</p>
 <p>这种方式是redis默认的持久化方式，它在配置文件（redis.conf）中的格式是：save N M，表示的是在N秒之内发生M次修改，则redis抓快照到磁盘中；</p>
@@ -268,15 +268,13 @@
 <p>Slaveof ip port</p>
 <p>Slaveof  replicof ip port </p>
 <p>监控   选主  通知</p>
-<h2 id="4、做过redis的集群吗？你们做集群的时候搭建了几台，都是怎么搭建的？"><a href="#4、做过redis的集群吗？你们做集群的时候搭建了几台，都是怎么搭建的？" class="headerlink" title="4、做过redis的集群吗？你们做集群的时候搭建了几台，都是怎么搭建的？"></a>4、做过redis的集群吗？你们做集群的时候搭建了几台，都是怎么搭建的？</h2><p>切片集群</p>
+<h2 id="4、redis的集群"><a href="#4、redis的集群" class="headerlink" title="4、redis的集群"></a>4、redis的集群</h2><p>切片集群</p>
 <p>Codis proxy </p>
 <p>Redis Cluster   </p>
 <p>Hash槽  16384哈希槽  槽和实例</p>
-<p>针对这类问题，我们首先考虑的是为什么要搭建集群？（这个需要针对我们的项目来说）</p>
-<p>Redis的数据是存放在内存中的，这就意味着redis不适合存储大数据，大数据存储一般公司常用hadoop中的Hbase或者MogoDB。因此redis主要用来处理高并发的，用我们的项目来说，电商项目如果并发大的话，一台单独的redis是不能足够支持我们的并发，这就需要我们扩展多台设备协同合作，即用到集群。</p>
+<p>为什么要搭建集群？</p>
+<p>Redis的数据是存放在内存中的，这就意味着redis不适合存储大数据，大数据存储一般公司常用hadoop中的Hbase或者MogoDB。因此redis主要用来处理高并发的，电商项目如果并发大的话，一台单独的redis是不能足够支持我们的并发，这就需要我们扩展多台设备协同合作，即用到集群。</p>
 <p>Redis搭建集群的方式有多种， redis3.0之后就支持redis-cluster集群，这种方式采用的是无中心结构，每个节点保存数据和整个集群的状态，每个节点都和其他所有节点连接。如果使用的话就用redis-cluster集群。</p>
-<p>集群这块直接说是公司运维搭建的，小公司的话也有可能由我们自己搭建，开发环境我们也可以直接用单机版的。但是可以了解一下redis的集群版。搭建redis集群的时候，对于用到多少台服务器，每家公司都不一样，大家针对自己项目的大小去衡量。举个简单的例子：</p>
-<p>我们项目中redis集群主要搭建了6台，3主（为了保证redis的投票机制）3从（高可用），每个主服务器都有一个从服务器，作为备份机。</p>
 <p>【扩展】</p>
 <p>1、架构图如下：</p>
 <p>（1）所有的节点都通过PING-PONG机制彼此互相连接；</p>
@@ -300,8 +298,7 @@
 <p>监控：监控主数据库和从数据库是否正常运行；</p>
 <p>提醒：当被监控的某个redis出现问题的时候，哨兵可以通过API向管理员或者其他应用程序发送通知；</p>
 <p>自动故障迁移：主数据库出现故障时，可以自动将从数据库转化为主数据库，实现自动切换；</p>
-<p>具体的配置步骤面试中可以说参考的网上的文档。要注意的是，如果master主服务器设置了密码，记得在哨兵的配置文件（sentinel.conf）里面也要配置访问密码</p>
-<h2 id="6、redis的安全机制（你们公司redis的安全这方面怎么考虑的？）"><a href="#6、redis的安全机制（你们公司redis的安全这方面怎么考虑的？）" class="headerlink" title="6、redis的安全机制（你们公司redis的安全这方面怎么考虑的？）"></a>6、redis的安全机制（你们公司redis的安全这方面怎么考虑的？）</h2><p>漏洞介绍：redis默认情况下，会绑定在bind 0.0.0.0:6379，这样就会将redis的服务暴露到公网上，如果在没有开启认证的情况下，可以导致任意用户在访问目标服务器的情况下未授权访问redis以及读取redis的数据，攻击者就可以在未授权访问redis的情况下可以利用redis的相关方法，成功在redis服务器上写入公钥，进而可以直接使用私钥进行直接登录目标主机；</p>
+<h2 id="6、redis的安全机制"><a href="#6、redis的安全机制" class="headerlink" title="6、redis的安全机制"></a>6、redis的安全机制</h2><p>漏洞介绍：redis默认情况下，会绑定在bind 0.0.0.0:6379，这样就会将redis的服务暴露到公网上，如果在没有开启认证的情况下，可以导致任意用户在访问目标服务器的情况下未授权访问redis以及读取redis的数据，攻击者就可以在未授权访问redis的情况下可以利用redis的相关方法，成功在redis服务器上写入公钥，进而可以直接使用私钥进行直接登录目标主机；</p>
 <p>比如：可以使用FLUSHALL方法，整个redis数据库将被清空</p>
 <p>解决方案：</p>
 <p>（1）禁止一些高危命令。修改redis.conf文件，用来禁止远程修改DB文件地址，比如 rename-command FLUSHALL “” 、rename-command CONFIG”” 、rename-command EVAL “”等；</p>
@@ -399,6 +396,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/09/06/shu-ju-ku/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据库</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

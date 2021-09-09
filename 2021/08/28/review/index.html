@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      13.3k 字
+      15.3k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      146
+      168
        分钟
     </span>
   
@@ -366,6 +366,9 @@
 </li>
 <li><p>HashMap的扩容</p>
 </li>
+<li><p>HashMap的源码，实现原理，JDK8中对HashMap做了怎样的优化。</p>
+<p>HaspMap扩容是怎样扩容的，为什么都是2的N次幂的大小。<br>HashMap，HashTable，ConcurrentHashMap的区别。<br>极高并发下HashTable和ConcurrentHashMap哪个性能更好，为什么，如何实现的。<br>HashMap在高并发下如果没有处理线程安全会有怎样的安全隐患，具体表现是什么。<br>java中四种修饰符的限制范围。<br>Object类中的方法。<br>接口和抽象类的区别，注意JDK8的接口可以有实现。<br>动态代理的两种方式，以及区别。<br>Java序列化的方式。<br>传值和传引用的区别，Java是怎么样的，有没有传值引用。<br>一个ArrayList在循环过程中删除，会不会出问题，为什么。<br>@transactional注解在什么情况下会失效，为什么。</p>
+</li>
 </ul>
 <h1 id="2-Mybatis"><a href="#2-Mybatis" class="headerlink" title="2. Mybatis"></a>2. Mybatis</h1><ul>
 <li><p>工作流程<br><img src="https://blog-1306562150.cos.ap-guangzhou.myqcloud.com/review/total-review/img007.png" srcset="/img/loading.gif" lazyload></p>
@@ -393,8 +396,8 @@
 <p>使用#{}可以有效的防止SQL注入，提高系统安全性。</p>
 </li>
 <li><p><strong>resultMap和resultType有什么区别</strong><br>在MyBatis进行查询映射时，其实查询出来的每一个属性都是放在一个对应的Map里面的，其中键是属性名，值则是其对应的值。<br>①当提供的返回类型属性是resultType时，MyBatis会将Map里面的键值对取出赋给resultType所指定的对象对应的属性。所以其实MyBatis的每一个查询映射的返回类型都是ResultMap，只是当提供的返回类型属性是resultType的时候，MyBatis对自动的给把对应的值赋给resultType所指定对象的属性。<br>②当提供的返回类型是resultMap时，因为Map不能很好表示领域模型，就需要自己再进一步的把它转化为对应的对象，这常常在复杂查询中很有作用。</p>
-<p>ResultType：<br> MyBatis会自动创建一个ResultMap对象，然后基于查找出来的属性名进行键值对封装，然后再看到返回类型是Blog对象，再从ResultMap中取出与Blog对象对应的键值对进行赋值。</p>
-<p>resultMap：<br>select映射中resultMap的值是一个外部resultMap的id，表示返回结果映射到哪一个resultMap上，外部resultMap的type属性表示该resultMap的结果是一个什么样的类型，这里是Blog类型，那么MyBatis就会把它当作一个Blog对象取出。resultMap节点的子节点id是用于标识该对象的id的，而result子节点则是用于标识一些简单属性的，其中的Column属性表示从数据库中查询的属性，Property则表示查询出来的属性对应的值赋给实体对象的哪个属性。</p>
+<p><strong>ResultType</strong>：<br> MyBatis会自动创建一个ResultMap对象，然后基于查找出来的属性名进行键值对封装，然后再看到返回类型是Blog对象，再从ResultMap中取出与Blog对象对应的键值对进行赋值。</p>
+<p><strong>resultMap</strong>：<br>select映射中resultMap的值是一个外部resultMap的id，表示返回结果映射到哪一个resultMap上，外部resultMap的type属性表示该resultMap的结果是一个什么样的类型，这里是Blog类型，那么MyBatis就会把它当作一个Blog对象取出。resultMap节点的子节点id是用于标识该对象的id的，而result子节点则是用于标识一些简单属性的，其中的Column属性表示从数据库中查询的属性，Property则表示查询出来的属性对应的值赋给实体对象的哪个属性。</p>
 <p>区别：</p>
 <p>一、对象不同</p>
 <p>1、resultmap：resultMap如果查询出来的列名和pojo的属性名不一致，通过定义一个resultMap对列名和pojo属性名之间作一个映射关系。</p>
@@ -407,7 +410,7 @@
 <p>2、resulttype：resultType是直接表示返回类型的,而resultMap则是对外部ResultMap的引用，但是resultType跟resultMap不能同时存在。</p>
 </li>
 <li><p>Mybatis常用标签</p>
-</li>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">select</span>&gt;</span>   <span class="hljs-tag">&lt;<span class="hljs-name">update</span>&gt;</span>   <span class="hljs-tag">&lt;<span class="hljs-name">delete</span>&gt;</span>  <span class="hljs-tag">&lt;<span class="hljs-name">insert</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">insert</span>&gt;</span><br>   动态sql<br>    <span class="hljs-tag">&lt;<span class="hljs-name">foreach</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">foreach</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">if</span> <span class="hljs-attr">test</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">if</span>&gt;</span><br></code></pre></td></tr></table></figure></li>
 <li><p><strong>mybatis如何处理多参数的</strong><br>Mybatis多参数传递入参四种处理方式</p>
 <p>1.利用参数出现的顺序</p>
 <p>2.使用注解需要使用到mybatis @Param注解</p>
@@ -428,7 +431,7 @@
 </li>
 <li><p>IOC和AOP的理解和实现使用有哪些?</p>
 </li>
-<li><p>SpringBean的生命周期?</p>
+<li><p>SpringBean的生命周期?<br>1.实例化对象<br>2.设置属性值<br>3.执行Bean 后置处理器中的 postProcessBeforeInitialization<br>4.调用初始化方法，进行初始化 初始化方法是通过 init method 来指定的<br>5.执行 Bean 的后置处理器中 postProcessAfterInitialization<br>6.使用Bean<br>7.IOC 容器关闭时， 销毁 Bean 对象</p>
 </li>
 <li><p>Spring如何解决循环依赖的问题?</p>
 <ul>
@@ -436,7 +439,8 @@
 <li>A类的构造函数中new了个B类,B类的构造函数中new了个A类,启动是否报错?</li>
 </ul>
 </li>
-<li><p>Spring事务的隔离级别,传播机制?<br>1.读未提交：存在脏读、不可重复读、幻读这些所有问题<br>2.读已提交：能够解决脏读问题，不可重复读、幻读问题还存在3.<br>可重复读：能够解决脏读、不可重复读问题，幻读问题还存在<br>4.串行化：锁定整个表，让对整个表的操作全部排队串行执行。能解决所有并发问题，安全性最好，但是性能极差</p>
+<li><p>Spring事务的隔离级别,传播机制?<br>1.读未提交：存在脏读、不可重复读、幻读这些所有问题<br>2.读已提交：能够解决脏读问题，不可重复读、幻读问题还存在</p>
+<p>3.可重复读：能够解决脏读、不可重复读问题，幻读问题还存在<br>4.串行化：锁定整个表，让对整个表的操作全部排队串行执行。能解决所有并发问题，安全性最好，但是性能极差</p>
 <p><strong>传播机制</strong>：事务方法A直接或间接调用事务方法B，事务方法A已经开启的事务如何传播给方法B来使用。<br><strong>设置传播行为的属性</strong>：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Transactional(readOnly = false, propagation = Propagation.REQUIRED)</span><br>- REQUIRED：默认值。<br>  - 当前方法必须工作在事务中。<br>  - 如果在当前方法执行前，线程上没有已经开启的事务，那么开启新事务，并在这个事务中运行。<br>  - 如果在当前方法执行前，线程上有已经开启的事务，那么就在这个已经开启的事务中运行。此时有可能和其他方法共用同一个事务。<br>  - 和其他操作共用事务的隐患是：其他操作回滚，当前自己的操作也会跟着一起被回滚。<br>  <br>- REQUIRES_NEW,建议使用。<br>  - 当前方法必须工作在事务中。<br>  - 不论当前方法运行前，线程上是否已经开启了事务，都会开启新的事务，并在这个事务中运行。<br>  - 好处：保证当前方法在事务中运行，而且是自己开的事务，这样就不会受其他方法回滚的影响。<br></code></pre></td></tr></table></figure></li>
 <li><p>默认创建的Bean是单例,还有哪些类型?一共有几种?<br><strong>Bean的种类</strong>：</p>
@@ -472,33 +476,58 @@
 </tr>
 </tbody></table>
 </li>
-<li><p>SpringIOC容器的一级二级三级缓存的作用?</p>
+<li><p>SpringIOC容器的一级二级三级缓存的作用?<br>添加到一级缓存：完成Bean的实例化，依赖注入，初始化等操作，生成完整的单例Bean后进行添加。</p>
+<p>添加到二级缓存：通过getBean获取实例，在三级缓存中获取到时，添加到二级缓存，并清理三级缓存。</p>
+<p>添加到三级缓存：通过createBeanInstance实例化Bean之后，调用populateBean进行依赖注入之前。</p>
 </li>
-<li><p>Spring的常用的注解有哪些?至少说出5个?<br>Controller,ComponetScan,Repostory,Service,</p>
+<li><p>Spring的常用的注解有哪些?至少说出5个?<br>Controller,ComponetScan,Repostory,Service,Bean</p>
 </li>
-<li><p>Spring事务在哪些情况下会失效?至少说出3种情况?</p>
+<li><p>Spring事务在哪些情况下会失效?至少说出3种情况?<br>1.未启用spring事务管理功能，@EnableTransactionManagement 注解用来启用spring事务自动管理事务的功能</p>
+<p>2.@Transactional注解没有用在public的方法上，用在其他可见度的方法上会失效。<br>3.业务和spring事务代码不在一个线程中<br>4.默认情况下，Spring会对unchecked异常进行事务回滚；如果是checked异常则不回滚。 </p>
 </li>
 <li><p>Spring事务的实现原理?</p>
+<p>如果说你加了一个 <code>@Transactional</code> 注解，此时 Spring 会使用 AOP 思想，对你的这个方法在执行之前，先去开启一个事务。执行完毕之后，根据你的方法是否报错，来决定回滚还是提交事务。</p>
 </li>
-<li><p>动态代理,有几种?—-JDK CGlib—哪些地方用到了JDK代理,哪些地方用到了CGlib实现动态代理?</p>
+<li><p>动态代理,有几种?—-JDK CGlib—哪些地方用到了JDK代理,哪些地方用到了CGlib实现动态代理?动态代理的原理<br>使用一个代理将对象包装起来 ，然后用该代理对象取代原始对象。任何对原始对象的调用都要通过代理。<br>代理对象决定是否以及何时将方法调<br>用转到原 始对象上<br>动态代理的方式<br>基于接口实现动态代理：<br>JDK动态代理<br>基于继承实现动态代理：<br>Cglib、 Javassist动态代理CGLib采用了底层的字节码技术，其原理是通过字节码技术为一个类创建子类，并在子类中采用方法拦截的技术拦截所有父类方法的调用，顺势织入横切逻辑。</p>
 </li>
 </ul>
 <h1 id="4-SpringMVC"><a href="#4-SpringMVC" class="headerlink" title="4. SpringMVC"></a>4. SpringMVC</h1><ul>
-<li>核心组件有哪些?</li>
-<li>工作流程是怎么样的?</li>
-<li>拦截器</li>
+<li><p>核心组件有哪些?<br>DispatcherServlet 控制器入口 负责分发请求</p>
+<p>HandlerMapping 负责根据请求 找到对应的控制器</p>
+<p>Controller 真正处理请求的控制器</p>
+<p>ModelAndView 封装数据信息和视图信息的</p>
+<p>ViewResolver 视图处理器 通过处理找到对应的页面</p>
+</li>
+<li><p>工作流程是怎么样的?</p>
+<p>请求到来时，第一个接受这个请求的前端控制器叫DispatcherServlet（这个需要在web.xml中配置），后端控制器叫Controller。负责处理请求URL和后端控制器映射的叫HandMapping，它有多种类型，比较灵活，也是在一个xml文件上进行配置。负责业务逻辑处理的模型对象一般也是我们平常写的DAO/DTO组件。只是它最后的返回更灵活，Controller返回一个ModelAndView对象给DispatcherServlet，ModelAndView可以携带一个视图对象，也可以携带一个视图对象的逻辑名。如果携带的是一个视图对象的逻辑名，那DispatcherServlet需要一个ViewResolver来查找用于渲染回应的视图对象。最后，DispatcherServlet将请求分派给ModelAndView对象指定的视图对象。视图对象负责渲染返回给客户的回应。</p>
+</li>
+<li><p>拦截器（Interceptor）</p>
+<p>通过拦截器可以进行权限验证、记录请求信息的日志、判断用户是否登录等。</p>
+<p>通过实现HandlerInterceptor接口，或继承HandlerInterceptor接口的实现（HandlerInterceptorAdapter）来定义。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 该方法会在控制器方法前执行，其返回值表示是否中断后续操作。当其返回值为true时，表示继续向下执行；</span><br><span class="hljs-comment">// 当其返回值为false时，会中断后续的所有操作（包括调用下一个拦截器和控制器类中的方法执行等）。</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">preHandle</span><span class="hljs-params">(HttpServletRequest request, </span></span><br><span class="hljs-params"><span class="hljs-function">                                 HttpServletResponse response, Object handler)</span><span class="hljs-keyword">throws</span> Exception </span>&#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        &#125;<br><span class="hljs-comment">// 该方法会在控制器方法调用之后，且解析视图之前执行。可以通过此方法对请求域中的模型和视图做出进一步的修改。</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">postHandle</span><span class="hljs-params">(HttpServletRequest request, </span></span><br><span class="hljs-params"><span class="hljs-function">                               HttpServletResponse response, Object handler,</span></span><br><span class="hljs-params"><span class="hljs-function">                               ModelAndView modelAndView)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>            <br>        &#125;<br><span class="hljs-comment">// 该方法会在整个请求完成，即视图渲染结束之后执行。可以通过此方法实现一些资源清理、记录日志信息等工作。</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">afterCompletion</span><span class="hljs-params">(HttpServletRequest request,</span></span><br><span class="hljs-params"><span class="hljs-function">                                    HttpServletResponse response, Object handler,</span></span><br><span class="hljs-params"><span class="hljs-function">                                    Exception ex)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        &#125;<br></code></pre></td></tr></table></figure></li>
 </ul>
 <h1 id="5-控制器Servlet"><a href="#5-控制器Servlet" class="headerlink" title="5. 控制器Servlet"></a>5. 控制器Servlet</h1><ul>
-<li>过滤器</li>
-<li>工作流程</li>
+<li><p>过滤器（Filter）<br>过滤器实质就是在Web应用服务器上的一个Web应用组件，用于拦截客户端（浏览器）与目标资源的请求，并对这些请求进行一定过滤处理再发送给目标资源。</p>
+</li>
+<li><p>工作流程<br>当用户通过浏览器访问服务器中的目标资源时，首先会被 Filter 拦截，在 Filter 中进行预处理操作，然后再将请求转发给目标资源。当服务器接收到这个请求后会对其进行响应，在服务器处理响应的过程中，也需要将响应结果经过滤器处理后，才发送给客户端。<br>  本质上，Filter 过滤器就是一个实现了 javax.servlet.Filter 接口的类，在 javax.servlet.Filter 接口中定义了三个方法<br>init()初始化过滤器<br>doFilter()方法有多个参数，其中，参数 request 和 response 为 Web 服务器或 Filter 链中的下一个 Filter 传递过来的请求和响应对象；参数 chain 代表当前 Filter 链的对象，只有在当前 Filter 对象中的 doFilter() 方法内部需要调用 FilterChain 对象的 doFilter() 方法，才能把请求交付给 Filter 链中的下一个 Filter 或者目标程序处理。</p>
+<p>destroy()：destroy() 方法在 Web 服务器卸载 Filter 对象之前被调用，该方法用于释放被 Filter 对象打开的资源，例如关闭数据库和 I/O 流。</p>
+</li>
 </ul>
 <h1 id="6-SpringBoot"><a href="#6-SpringBoot" class="headerlink" title="6. SpringBoot"></a>6. SpringBoot</h1><ul>
-<li>原理: 对框架进行简化,提高研发的效率—SSM <ul>
-<li>起步依赖: pom.xml</li>
-<li>自动配置: 省略spring.xml springmvc.xml spring-mybatis.xml</li>
+<li><p>原理: 对框架进行简化,提高研发的效率—SSM </p>
+<ul>
+<li><p>起步依赖: pom.xml</p>
+</li>
+<li><p>自动配置: 省略spring.xml springmvc.xml spring-mybatis.xml</p>
+</li>
+<li><p>pom.xml中的spring-boot-starter-parent</p>
+<p>spring-boot-dependencies:核心依赖在父工程中</p>
+<p>我们在写或者引入一些SpringBoot依赖的时候，不需要指定版本，因为一部分坐标的版本、依赖管理、插件管理已经定义好，所以我们的SpringBoot工程继承spring-boot-starter-parent后已经具备版本锁定等配置了（不会出现版本冲突的问题）。所以起步依赖的作用就是进行依赖的传递。</p>
+</li>
 </ul>
 </li>
-<li>springboot的启动类的启动流程是怎样的?</li>
+<li><p>springboot的启动类的启动流程是怎样的?</p>
+</li>
 </ul>
 <h1 id="7-springcloud"><a href="#7-springcloud" class="headerlink" title="7. springcloud"></a>7. springcloud</h1><ul>
 <li><p>Http与RPC的区别?<br>RPC（Remote Procedure Call Protocol）——远程过程调用协议，它是一种通过网络从远程计算机程序上请求服务，而不需要了解底层网络技术的协议。</p>
@@ -562,8 +591,8 @@
 </li>
 </ul>
 <h1 id="10-Redis"><a href="#10-Redis" class="headerlink" title="10. Redis"></a>10. Redis</h1><ul>
-<li>为什么这么快?至少说出5种原因</li>
-<li>redis是单线程还是多线程?为什么?</li>
+<li>为什么这么快?至少说出5种原因<br>1.使用内存<br>2.</li>
+<li>redis是单线程还是多线程?为什么?<br>在处理外部请求的时候是单线程，redis内部设计是多线程</li>
 <li>常用的数据类型有哪些?什么场景下使用了?</li>
 <li>redis线程安全不安全?为什么?</li>
 <li>集群什么叫去中心化?什么时候进入fail状态?什么是槽?多少个?</li>
@@ -1147,9 +1176,23 @@
 <p>4.3 抽象工厂模式</p>
 <p>工厂方法模式有一个问题就是，类的创建依赖工厂类，也就是说，<strong>如果想要拓展程序，必须对工厂类进行修改，这违背了闭包原则</strong>。<br><strong>定义与使用场景：</strong>同上。<br><strong>例子：</strong>同上。 </p>
 <p><strong>总结：</strong>如果要新增发送微信，则只需做一个实现类，实现Sender接口，同时做一个工厂类，实现Provider接口，就OK了，无需去改动现成的代码。这样做，拓展性较好！<br><strong>所有工厂模式中，抽象工厂模式最先进。</strong></p>
-<p>4.3 代理模式</p>
+<p>4.4 代理模式</p>
 <p><strong>定义与使用场景：</strong>一个代理类代表一个真实类的功能，通过访问代理类来实现对真实类的访问。<br> 比如买火车票这件小事：黄牛相当于是火车站的代理，我们可以通过黄牛买票，但只能去火车站进行改签和退票。<br> 又比如需要对原有的方法进行修改，就是采用一个代理类调用原有的方法，以避免修改原有代码。 </p>
 <p>一个真实对象realSubject提供一个代理对象proxy。<strong>通过proxy可以调用realSubject的部分功能</strong>，并添加一些额外的业务处理*，同时可以屏蔽realSubject中未开放的接口。<br> 1、RealSubject 是委托类，Proxy 是代理类；<br> 2、Subject 是委托类和代理类的接口；<br> 3、request() 是委托类和代理类的共同方法；</p>
+<p>4.5 门面模式</p>
+<p>门面模式，其核心为<strong>外部与一个子系统的通信必须通过一个统一的外观对象进行，使得子系统更易于使用</strong>。</p>
+<p>门面模式的核心为Facade即门面对象，门面对象核心为几个点：</p>
+<ul>
+<li>知道所有子角色的功能和责任</li>
+<li>将客户端发来的请求委派到子系统中，没有实际业务逻辑</li>
+<li>不参与子系统内业务逻辑的实现</li>
+</ul>
+<p>SLF4J是典型的门面模式</p>
+<p><strong>slf4j只是一个日志标准，并不是日志系统的具体实现</strong>。理解这句话非常重要，slf4j只做两件事情：</p>
+<ul>
+<li>提供日志接口</li>
+<li>提供获取具体日志对象的方法</li>
+</ul>
 
             </div>
             <hr>
