@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      15.3k 字
+      15.4k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      168
+      169
        分钟
     </span>
   
@@ -356,8 +356,8 @@
 <p>不可以。因为在类加载中，会根据双亲委派机制去寻找当前java.lang.String是否已被加载。由于启动类加载器已在启动时候加载了所以不会再次加载，因此使用的String是已在java核心类库加载过的String，而不是新定义的String。</p>
 </li>
 <li><p>Java中的异常分类<br>Throwable -&gt; Error,Exception</p>
-<p>Error:严重问题，例如内存溢出</p>
-<p>Exception -&gt;运行时异常： RuntimeException，编译时异常</p>
+<p>Error-&gt;              严重问题，例如内存溢出</p>
+<p>Exception -&gt;     运行时异常： RuntimeException</p>
 </li>
 <li><p>List的扩容步骤</p>
 <p>分两步：</p>
@@ -367,7 +367,10 @@
 <li><p>HashMap的扩容</p>
 </li>
 <li><p>HashMap的源码，实现原理，JDK8中对HashMap做了怎样的优化。</p>
-<p>HaspMap扩容是怎样扩容的，为什么都是2的N次幂的大小。<br>HashMap，HashTable，ConcurrentHashMap的区别。<br>极高并发下HashTable和ConcurrentHashMap哪个性能更好，为什么，如何实现的。<br>HashMap在高并发下如果没有处理线程安全会有怎样的安全隐患，具体表现是什么。<br>java中四种修饰符的限制范围。<br>Object类中的方法。<br>接口和抽象类的区别，注意JDK8的接口可以有实现。<br>动态代理的两种方式，以及区别。<br>Java序列化的方式。<br>传值和传引用的区别，Java是怎么样的，有没有传值引用。<br>一个ArrayList在循环过程中删除，会不会出问题，为什么。<br>@transactional注解在什么情况下会失效，为什么。</p>
+<p>HaspMap扩容是怎样扩容的，为什么都是2的N次幂的大小。<br>HashMap，HashTable，ConcurrentHashMap的区别。<br>极高并发下HashTable和ConcurrentHashMap哪个性能更好，为什么，如何实现的。<br>HashMap在高并发下如果没有处理线程安全会有怎样的安全隐患，具体表现是什么。<br>java中四种修饰符的限制范围。</p>
+<p>Object类中的方法。<br>notify(),notifyAll(),wait(),clone(),equals()</p>
+<p>Java序列化的方式。</p>
+<p>传值和传引用的区别，Java是怎么样的，有没有传值引用。<br>一个ArrayList在循环过程中删除，会不会出问题，为什么。</p>
 </li>
 </ul>
 <h1 id="2-Mybatis"><a href="#2-Mybatis" class="headerlink" title="2. Mybatis"></a>2. Mybatis</h1><ul>
@@ -482,7 +485,7 @@
 </li>
 <li><p>Spring的常用的注解有哪些?至少说出5个?<br>Controller,ComponetScan,Repostory,Service,Bean</p>
 </li>
-<li><p>Spring事务在哪些情况下会失效?至少说出3种情况?<br>1.未启用spring事务管理功能，@EnableTransactionManagement 注解用来启用spring事务自动管理事务的功能</p>
+<li><p>Spring事务在哪些情况下会<strong>失效</strong>?至少说出3种情况?<br>1.未启用spring事务管理功能，@EnableTransactionManagement 注解用来启用spring事务自动管理事务的功能</p>
 <p>2.@Transactional注解没有用在public的方法上，用在其他可见度的方法上会失效。<br>3.业务和spring事务代码不在一个线程中<br>4.默认情况下，Spring会对unchecked异常进行事务回滚；如果是checked异常则不回滚。 </p>
 </li>
 <li><p>Spring事务的实现原理?</p>
@@ -499,7 +502,7 @@
 <p>ViewResolver 视图处理器 通过处理找到对应的页面</p>
 </li>
 <li><p>工作流程是怎么样的?</p>
-<p>请求到来时，第一个接受这个请求的前端控制器叫DispatcherServlet（这个需要在web.xml中配置），后端控制器叫Controller。负责处理请求URL和后端控制器映射的叫HandMapping，它有多种类型，比较灵活，也是在一个xml文件上进行配置。负责业务逻辑处理的模型对象一般也是我们平常写的DAO/DTO组件。只是它最后的返回更灵活，Controller返回一个ModelAndView对象给DispatcherServlet，ModelAndView可以携带一个视图对象，也可以携带一个视图对象的逻辑名。如果携带的是一个视图对象的逻辑名，那DispatcherServlet需要一个ViewResolver来查找用于渲染回应的视图对象。最后，DispatcherServlet将请求分派给ModelAndView对象指定的视图对象。视图对象负责渲染返回给客户的回应。</p>
+<p>请求到来时，第一个接受这个请求的前端控制器叫DispatcherServlet（这个需要在web.xml中配置），后端控制器叫Controller。负责处理请求URL和后端控制器映射的叫HandlerMapping，它有多种类型，比较灵活，也是在一个xml文件上进行配置。负责业务逻辑处理的模型对象一般也是我们平常写的DAO/DTO组件。只是它最后的返回更灵活，Controller返回一个ModelAndView对象给DispatcherServlet，ModelAndView可以携带一个视图对象，也可以携带一个视图对象的逻辑名。如果携带的是一个视图对象的逻辑名，那DispatcherServlet需要一个ViewResolver来查找用于渲染回应的视图对象。最后，DispatcherServlet将请求分派给ModelAndView对象指定的视图对象。视图对象负责渲染返回给客户的回应。</p>
 </li>
 <li><p>拦截器（Interceptor）</p>
 <p>通过拦截器可以进行权限验证、记录请求信息的日志、判断用户是否登录等。</p>
@@ -1124,7 +1127,7 @@
 <li>正态分布的随机算法</li>
 </ul>
 <h1 id="18-拓展项目"><a href="#18-拓展项目" class="headerlink" title="18. 拓展项目"></a>18. 拓展项目</h1><p>完整电商项目:<a target="_blank" rel="noopener" href="https://github.com/macrozheng/mall">https://github.com/macrozheng/mall</a><br>秒杀项目:<a target="_blank" rel="noopener" href="https://github.com/qiurunze123/miaosha">https://github.com/qiurunze123/miaosha</a><br>运维监控项目:<a target="_blank" rel="noopener" href="https://github.com/xkcoding/spring-boot-demo">https://github.com/xkcoding/spring-boot-demo</a></p>
-<h1 id="拓展-amp-总结-面试点"><a href="#拓展-amp-总结-面试点" class="headerlink" title="拓展&amp;总结(面试点)"></a>拓展&amp;总结(面试点)</h1><h4 id="1-java8中接口和抽象类的区别"><a href="#1-java8中接口和抽象类的区别" class="headerlink" title="1. java8中接口和抽象类的区别"></a><strong>1. java8中接口和抽象类的区别</strong></h4><p><strong>相同点：</strong></p>
+<h1 id="拓展-amp-总结-面试点"><a href="#拓展-amp-总结-面试点" class="headerlink" title="拓展&amp;总结(面试点)"></a>拓展&amp;总结(面试点)</h1><h3 id="1-java8中接口和抽象类的区别"><a href="#1-java8中接口和抽象类的区别" class="headerlink" title="1. java8中接口和抽象类的区别"></a><strong>1. java8中接口和抽象类的区别</strong></h3><p><strong>相同点：</strong></p>
 <ol>
 <li>都是抽象类型</li>
 <li>都可以有实现方法（以前接口不行）</li>
@@ -1137,7 +1140,7 @@
 <li>接口中定义的变量默认是public static final 型，且必须给其<strong>初值</strong>，所以实现类中<strong>不能重新定义</strong>，也不<strong>能改变其值</strong>；抽象类中的变量默认是 default 型，其值可以在子类中重新定义，也可以重新赋值</li>
 </ol>
 <p><strong>总结：默认方法给予我们修改接口而不破坏原来的实现类的结构提供了便利，目前java 8的集合框架已经大量使用了默认方法来改进了</strong></p>
-<h4 id="2-volatile和synchronized关键字的区别"><a href="#2-volatile和synchronized关键字的区别" class="headerlink" title="2. volatile和synchronized关键字的区别"></a>2. volatile和synchronized关键字的区别</h4><table>
+<h3 id="2-volatile和synchronized关键字的区别"><a href="#2-volatile和synchronized关键字的区别" class="headerlink" title="2. volatile和synchronized关键字的区别"></a>2. volatile和synchronized关键字的区别</h3><table>
 <thead>
 <tr>
 <th>volatile</th>
@@ -1165,9 +1168,9 @@
 <td>synchronized标记的变量可以被编译器优化</td>
 </tr>
 </tbody></table>
-<h4 id="3-悲观锁-乐观锁"><a href="#3-悲观锁-乐观锁" class="headerlink" title="3. 悲观锁/乐观锁"></a>3. 悲观锁/乐观锁</h4><p>一种思想, java中JUC.atomic下的类, 底层CAS就是乐观锁的一种实现, 默认数据不会改变, 心比较乐观;<br>synchronized | ReentrantLock 就是悲观锁的一种实现, 比较悲观, 每次都认为其他人会改变数据, 所以加锁不让其他人操作, 整个数据处理过程只能自己操作</p>
+<h3 id="3-悲观锁-乐观锁"><a href="#3-悲观锁-乐观锁" class="headerlink" title="3. 悲观锁/乐观锁"></a>3. 悲观锁/乐观锁</h3><p>一种思想, java中JUC.atomic下的类, 底层CAS就是乐观锁的一种实现, 默认数据不会改变, 心比较乐观;<br>synchronized | ReentrantLock 就是悲观锁的一种实现, 比较悲观, 每次都认为其他人会改变数据, 所以加锁不让其他人操作, 整个数据处理过程只能自己操作</p>
 <p>乐观锁比较适用于读多写少的情况(多读场景)<br>悲观锁比较适用于写多读少的情况(多写场景)</p>
-<h4 id="4-Java常用设计模式"><a href="#4-Java常用设计模式" class="headerlink" title="4.Java常用设计模式"></a>4.Java常用设计模式</h4><p>4.1 单例模式</p>
+<h3 id="4-Java常用设计模式"><a href="#4-Java常用设计模式" class="headerlink" title="4.Java常用设计模式"></a>4.Java常用设计模式</h3><p>4.1 单例模式</p>
 <p>保证一个类仅有一个实例并提供一个全局访问点，如一些配置文件或者管理类可以设计为单例，常用的线程池也是单例。<br><strong>例子：</strong><br> 建议采用 饿汉式 创建方法。线程安全，容易实现。初始化慢一点。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SingleObject</span></span>&#123;<br>    <span class="hljs-comment">// 创建SingleObject的一个对象</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> SingleObject instance = <span class="hljs-keyword">new</span> SingleObject();<br>    <span class="hljs-comment">// 让构造函数为private,这样该类就不会实例化</span><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">SingleObject</span><span class="hljs-params">()</span></span>&#123;&#125;<br>    <span class="hljs-comment">// 获取唯一可用的对象</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-title">SingleObject</span><span class="hljs-params">()</span> <span class="hljs-title">getInstance</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">return</span> instance;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -1193,6 +1196,14 @@
 <li>提供日志接口</li>
 <li>提供获取具体日志对象的方法</li>
 </ul>
+<h3 id="5-SpringCloud五大组件"><a href="#5-SpringCloud五大组件" class="headerlink" title="5.SpringCloud五大组件"></a>5.SpringCloud五大组件</h3><h3 id="6-Linux常用命令"><a href="#6-Linux常用命令" class="headerlink" title="6.Linux常用命令"></a>6.Linux常用命令</h3><p>cd切换文件路径</p>
+<p>cat 用于在标准输出（监控器或屏幕）上查看文件内容</p>
+<p>ls会列举出当前工作目录的内容（文件或文件夹）。</p>
+<p>cp复制文件</p>
+<p>tail 默认在标准输出上显示给定文件的最后10行内容，可以使用tail -n N 指定在标准输出上显示文件的最后N行内容。</p>
+<p>help</p>
+<p>exit</p>
+<p>ping</p>
 
             </div>
             <hr>

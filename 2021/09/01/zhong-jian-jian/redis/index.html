@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.8k 字
+      4.4k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      42
+      47
        分钟
     </span>
   
@@ -332,16 +332,28 @@
 <p>​                                                  </p>
 <p><strong>问题：</strong>删除操作缺乏原子性。</p>
 <p><strong>场景：</strong></p>
-<p>\1. index1执行删除时，查询到的lock值确实和uuid相等</p>
-<p>\2. index1执行删除前，lock刚好过期时间已到，被redis自动释放</p>
-<p>\3. index2获取了lock</p>
-<p>\4. index1执行删除，此时会把index2的lock删除</p>
+<ol>
+<li><p>index1执行删除时，查询到的lock值确实和uuid相等</p>
+</li>
+<li><p>index1执行删除前，lock刚好过期时间已到，被redis自动释放</p>
+</li>
+<li><p>index2获取了lock</p>
+</li>
+<li><p>index1执行删除，此时会把index2的lock删除</p>
+</li>
+</ol>
 <p><strong>解决：</strong>使用LUA脚本保证删除的原子性</p>
 <p><strong>redis</strong>集群状态下的问题：</p>
-<p>\1. 客户端A从master获取到锁</p>
-<p>\2. 在master将锁同步到slave之前，master宕掉了。</p>
-<p>\3. slave节点被晋级为master节点</p>
-<p>\4. 客户端B取得了同一个资源被客户端A已经获取到的另外一个锁。</p>
+<ol>
+<li><p>客户端A从master获取到锁</p>
+</li>
+<li><p>在master将锁同步到slave之前，master宕掉了。</p>
+</li>
+<li><p>slave节点被晋级为master节点</p>
+</li>
+<li><p>客户端B取得了同一个资源被客户端A已经获取到的另外一个锁。</p>
+</li>
+</ol>
 <p>安全失效！</p>
 <p><strong>使用redisson</strong> <strong>解决分布式锁</strong></p>
 <p>​      redisson ： 工具</p>
@@ -359,8 +371,33 @@
 <p>以 @Transactional 注解为植入点的切点，这样才能知道@Transactional注解标注的方法需要被代理。</p>
 <p>@Transactional注解的切面逻辑类似于@Around</p>
 <p><strong>模拟事务，缓存可以这样实现：</strong></p>
-<p>\1. 自定义缓存注解@GmallCache（类似于事务@Transactional）</p>
-<p>\2. 编写切面类，使用环绕通知实现缓存的逻辑封装</p>
+<ol>
+<li><p>自定义缓存注解@GmallCache（类似于事务@Transactional）</p>
+</li>
+<li><p>编写切面类，使用环绕通知实现缓存的逻辑封装</p>
+</li>
+</ol>
+<h2 id="三、数据双写问题"><a href="#三、数据双写问题" class="headerlink" title="三、数据双写问题"></a>三、数据双写问题</h2><p>什么是数据双写？</p>
+<p>同一份数据，需要写数据库、写缓存。</p>
+<p>双写很难保证强一致性，可以保证最终一致性。</p>
+<p>要做到强一致性就需要将所有读写请求用队列串行化，但是性能非常差，降低系统的QPS。</p>
+<p>没有完美的方案，用到缓存就会存在不一致的情况，需要根据具体业务权衡得失，选择合适业务的方案。</p>
+<p><strong>方案1：先更新数据库，再删除缓存(推荐方案)</strong></p>
+<p>此方案数据不一致的几率比较低，并且实现简单。</p>
+<p>造成数据不一致的情况：在缓存刚好失效时，有线程查询数据库得到旧值，另外一个线程更新数据库并删除缓存后，前面持有旧值的线程将数据存入缓存，造成数据不一致。</p>
+<p><strong>方案2：先删除缓存，再更新数据库</strong></p>
+<p>造成数据不一致的情况：删除缓存后，有线程将旧的数据重写回缓存，造成数据不一致。</p>
+<p><strong>方案3：先更新数据库，再更新缓存</strong></p>
+<p>造成数据不一致的情况：多个线程更新缓存时，由于网络问题导致更新顺序错乱，造成数据不一致。</p>
+<p><strong>方案4：延迟双删</strong></p>
+<p>先删除缓存，再更新数据库，休眠一段时间，再删除缓存。</p>
+<p>在高并发场景会影响性能，也极大降低了数据不一致的可能性。</p>
+<p><strong>方案5：异步更新</strong></p>
+<p>使用Canal中间件订阅数据库的binlog，来对缓存更新。</p>
+<p>造成数据不一致的情况：消费binlog也有一定时间的延迟，还是可能出现数据不一致。</p>
+<p><strong>方案6：先删除缓存，保存到数据库后，再删除缓存，再保存到缓存</strong></p>
+<p>防止其他线程更改缓存后出现不一致。</p>
+<p>写缓存失效的情况<br>上述方案都可能出现更新或删除缓存失败的情况，可以另起线程重试，或加入消息队列重试。</p>
 
             </div>
             <hr>
