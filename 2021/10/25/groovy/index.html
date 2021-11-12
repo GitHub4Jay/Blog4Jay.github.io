@@ -18,9 +18,25 @@
   <meta name="author" content="Jay">
   <meta name="keywords" content="">
   
-  <title>归档 - Jay&#39;s Blog</title>
+  <title>Jay&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -48,7 +64,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -147,9 +163,46 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="归档">
+            <span class="h2" id="subtitle" title="">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-25 16:18" pubdate>
+        2021年10月25日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      296 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      3
+       分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -162,40 +215,92 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 13 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2021</p>
-    
-    <a href="/2021/06/22/springcloud/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">SpringCloud</span>
-      <time style="float: right;">06-22</time>
-    </a>
-  
-</div>
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <h1 id="Groovy"><a href="#Groovy" class="headerlink" title="Groovy"></a>Groovy</h1><h2 id="一、Groovy-语言简单学习"><a href="#一、Groovy-语言简单学习" class="headerlink" title="一、Groovy 语言简单学习"></a>一、Groovy 语言简单学习</h2><p>Groovy 和java有很大程度上相似，学习成本低，只是为了更好使用gradle 简单学习Groovy</p>
+<p>在idea中打开groovy console 点击 tool-&gt;groovy console 打开</p>
+<p>ctrl + enter 运行代码</p>
+<p>通过def关键字定义变量和方法</p>
+<p>1.字符串的表示</p>
+<p>单引号和双引号都可以定义一个字符串，区别是单引号中的所有表达式都是常量字符串，而双引号可以对字符串里的表达式做运算。一个美元符号加一对花括号，花括号里放表达式，例如：{a+b}，只有一个变量时可以省略花括号，例如：name</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs groovy"><span class="hljs-comment">// 这是注释</span><br>println(<span class="hljs-string">&quot;test1&quot;</span>)<br><span class="hljs-comment">// 这是println的简写方式</span><br>println <span class="hljs-string">&quot;test2&quot;</span><br><br><span class="hljs-comment">// 定义变量</span><br><span class="hljs-keyword">def</span> i = <span class="hljs-number">15</span><br>println(i)<br><br><span class="hljs-keyword">def</span> s = <span class="hljs-string">&quot;HelloWorld&quot;</span><br>println(s)<br></code></pre></td></tr></table></figure>
 
 
 
+<p>2.集合</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs groovy"><span class="hljs-comment">// 集合定义</span><br><span class="hljs-keyword">def</span> list = [<span class="hljs-string">&#x27;hello&#x27;</span>,<span class="hljs-string">&#x27;world&#x27;</span>]<br><br><span class="hljs-comment">// 添加元素</span><br>list.add()   <span class="hljs-comment">//add方法可以用&lt;&lt;替代</span><br>list &lt;&lt; <span class="hljs-string">&#x27;hi&#x27;</span><br><br><span class="hljs-comment">// 取出元素</span><br>println(list.get(<span class="hljs-number">0</span>))     <span class="hljs-comment">//hello</span><br>println(list.get(<span class="hljs-number">2</span>))     <span class="hljs-comment">//hi</span><br><br><span class="hljs-comment">// List定义</span><br><br><br></code></pre></td></tr></table></figure>
 
 
-              </div>
+
+<p>3.Map</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs groovy"><span class="hljs-comment">// map定义</span><br><span class="hljs-keyword">def</span> map = [<span class="hljs-string">&#x27;key&#x27;</span>:<span class="hljs-string">&#x27;value&#x27;</span>]<br>println(map.get(<span class="hljs-string">&#x27;key&#x27;</span>))<br><br><span class="hljs-comment">// 添加</span><br>map.test = <span class="hljs-string">&#x27;add&#x27;</span><br>println(map.get(<span class="hljs-string">&#x27;test&#x27;</span>))<br></code></pre></td></tr></table></figure>
+
+
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/09/20/javase/">
+                        <span class="hidden-mobile">JavaSE</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -275,9 +380,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 

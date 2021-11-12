@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.1k 字
+      2.4k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      23
+      26
        分钟
     </span>
   
@@ -373,7 +373,10 @@
 </li>
 <li><p>Java中final、finally、finalize的区别与用法<br><strong>1.简单区别：</strong><br>final用于声明属性，方法和类，分别表示属性不可改变，方法不可覆盖，类不可继承。<br>finally是异常处理语句结构的一部分，表示总是执行。执行一些最终操作例如关闭连接，释放锁。<br>finalize是Object类的一个方法，在垃圾收集器执行的时候会调用被回收对象的此方法，供垃圾收集时的其他资源回收，例如关闭文件等。<br><strong>2.中等区别：</strong><br>final：java中的关键字，修饰符。<br>A).如果一个类被声明为final，就意味着它不能再派生出新的子类，不能作为父类被继承。因此，一个类不能同时被声明为abstract抽象类的和final的类。<br>B).如果将变量或者方法声明为final，可以保证它们在使用中不被改变.<br>　　1)被声明为final的变量必须在声明时给定初值，而在以后的引用中只能读取，不可修改。<br>　　2)被声明final的方法只能使用，不能重载。<br>finally：java的一种异常处理机制。<br>　　finally是对Java异常处理模型的最佳补充。finally结构使代码总会执行，而不管无异常发生。使用finally可以维护对象的内部状态，并可以清理非内存资源。特别是在关闭数据库连接这方面，如果程序员把数据库连接的close()方法放到finally中，就会大大降低程序出错的几率。<br>finalize：Java中的一个方法名。<br>Java技术使用finalize()方法在垃圾收集器将对象从内存中清除出去前，做必要的清理工作。这个方法是由垃圾收集器在确定这个对象没被引用时对这个对象调用的。它是在Object类中定义的，因此所的类都继承了它。子类覆盖finalize()方法以整理系统资源或者执行其他清理工作。finalize()方法是在垃圾收集器删除对象之前对这个对象调用的。</p>
 </li>
-<li></li>
+<li><p>==和equals()的区别首先的区别是，equals 是方法，而 == 是操作符；<br>1）首先的区别是，equals 是方法，而 == 是操作符；</p>
+<p>2）对于基本类型的变量来说（如 <code>short</code>、 <code>int</code>、 <code>long</code>、 <code>float</code>、 <code>double</code>），只能使用 == ，因为这些基本类型的变量没有 equals 方法。对于基本类型变量的比较，使用 == 比较， <strong>一般比较的是它们的值</strong>。</p>
+<p>3）对于引用类型的变量来说（例如 String 类）才有 equals 方法，因为 String 继承了 Object 类， equals 是<br>Object 类的通用方法。对于该类型对象的比较，默认情况下，也就是没有复写 Object 类的 equals 方法，使用 == 和 equals 比较是一样效果的，都是<strong>比较的是它们在内存中的存放地址</strong>。但是对于某些类来说，为了满足自身业务需求，可能存在 equals 方法被复写的情况，这时使用 equals 方法比较需要看具体的情况，<strong>例如 String 类，使用 equals 方法会比较它们的值</strong>；</p>
+</li>
 </ol>
 
             </div>
@@ -408,6 +411,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/10/25/groovy/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

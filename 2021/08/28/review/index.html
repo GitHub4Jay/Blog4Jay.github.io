@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      19.9k 字
+      20.3k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      218
+      223
        分钟
     </span>
   
@@ -433,10 +433,8 @@
 <li><p>SpringIOC容器的生命周期?</p>
 </li>
 <li><p>IOC和AOP的理解和实现使用有哪些?</p>
+<p><strong>AOP</strong>：动态代理<br>代理类：核心操作前日志，核心操作，核心操作后日志</p>
 </li>
-</ul>
-<p>  <strong>AOP</strong>：动态代理<br>  代理类：核心操作前日志，核心操作，核心操作后日志</p>
-<ul>
 <li><p>SpringBean的生命周期?<br>1.实例化对象<br>2.设置属性值<br>3.执行Bean 后置处理器中的 postProcessBeforeInitialization<br>4.调用初始化方法，进行初始化 初始化方法是通过 init method 来指定的<br>5.执行 Bean 的后置处理器中 postProcessAfterInitialization<br>6.使用Bean<br>7.IOC 容器关闭时， 销毁 Bean 对象</p>
 </li>
 <li><p>Spring如何解决循环依赖的问题?</p>
@@ -494,7 +492,7 @@
 <li><p>Spring事务的实现原理?</p>
 <p>如果说你加了一个 <code>@Transactional</code> 注解，此时 Spring 会使用 AOP 思想，对你的这个方法在执行之前，先去开启一个事务。执行完毕之后，根据你的方法是否报错，来决定回滚还是提交事务。</p>
 </li>
-<li><p>动态代理,有几种?—-JDK CGlib—哪些地方用到了JDK代理,哪些地方用到了CGlib实现动态代理?动态代理的原理<br>使用一个代理将对象包装起来 ，然后用该代理对象取代原始对象。任何对原始对象的调用都要通过代理。<br>代理对象决定是否以及何时将方法调<br>用转到原 始对象上<br>动态代理的方式<br>基于接口实现动态代理：<br>JDK动态代理<br>基于继承实现动态代理：<br>Cglib、 Javassist动态代理CGLib采用了底层的字节码技术，其原理是通过字节码技术为一个类创建子类，并在子类中采用方法拦截的技术拦截所有父类方法的调用，顺势织入横切逻辑。</p>
+<li><p>动态代理,有几种?—-JDK CGlib—哪些地方用到了JDK代理,哪些地方用到了CGlib实现动态代理?动态代理的原理<br>使用一个代理将对象包装起来 ，然后用该代理对象取代原始对象。任何对原始对象的调用都要通过代理。<br>代理对象决定是否以及何时将方法调用转到原始对象上<br>动态代理的方式<br>基于接口实现动态代理：<br>JDK动态代理<br>基于继承实现动态代理：<br>Cglib动态代理CGLib采用了底层的字节码技术，其原理是通过字节码技术为一个类创建子类，并在子类中采用方法拦截的技术拦截所有父类方法的调用，顺势织入横切逻辑。</p>
 </li>
 </ul>
 <h1 id="4-SpringMVC"><a href="#4-SpringMVC" class="headerlink" title="4. SpringMVC"></a>4. SpringMVC</h1><ul>
@@ -1435,7 +1433,7 @@
 
 
 
-<p><strong>SQL执行太慢，怎么解决？</strong></p>
+<h3 id="22-谈谈你对Spring的理解？"><a href="#22-谈谈你对Spring的理解？" class="headerlink" title="22.谈谈你对Spring的理解？"></a>22.谈谈你对Spring的理解？</h3><p><strong>SQL执行太慢，怎么解决？</strong></p>
 <p><strong>1)SQL偶尔执行慢</strong>，可能是因为网络抖动、InnoDB的脏页刷新机制、操作等待锁资源导致的；</p>
 <p>InnoDB的redo_log执行繁忙，数据库在在同步数据到磁盘的时候，就有可能导致SQL语句执行的很慢。</p>
 <p>操作锁等待：update -&gt;行锁，被行锁锁定后，只有持有锁的事务可以对这些记录进行操作，其他事务对这些行的操作请求将会进入等待，直到行记录锁被释放。</p>
@@ -1471,6 +1469,14 @@
 <p>服务发现，服务治理，服务注册</p>
 <p>配置中心</p>
 <p>分布式系统中，配置太多，需要集中管理</p>
+<p>RDB：<strong>快照形式是直接把内存中的数据保存到一个dump文件中，定时保存，保存策略</strong><br>可以在指定的<strong>时间间隔</strong>内对数据进行<strong>快照</strong>存储，redis会单独创建(folk)一个子线程进行持久化，会先将数据写入一个临时文件(dump.rdb)中，待持久化过程结束后，将文件替换上次持久化好的文件。<br>整个过程中，主线程是不会进行I/O操作的，这样确保了极高的性能。缺点是可能会丢失数据。<br>默认保存策略：<br>save900 1  900秒之内，如果超过1个key被修改，则发起快照保存；<br>save300 10 300秒内，如果超过10个key被修改，则发起快照保存;<br>save60 10000 1分钟之内，如果1万个key被修改，则发起快照保存</p>
+<p>AOF：<strong>把所有的对redis的服务器进行修改的命令都存到一个文件里，命令的集合</strong></p>
+<p>Redis重新启动时读取这个文件，重新执行创建、修改数据的命令恢复数据。</p>
+<p>使用的是append  恢复失败也不会对之前的命令造成影响。</p>
+<p>保存策略：</p>
+<p>appendfsync always：每产生一条数据都执行保存操作，效率低，安全性高<br>appendfsync everysec：每秒执行一次保存操作，如果在未保存当前秒内操作时发生了断电，仍然会导致一部分数据丢失（即一秒钟的数据）;</p>
+<p>appendfsync no：从不保存，将数据交给操作系统处理，效率高，不安全。<br><strong>推荐(默认)是每秒一次，兼顾安全性和速度</strong></p>
+<p>​     </p>
 
             </div>
             <hr>
