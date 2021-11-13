@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+    
+    <title>JavaSE - Jay&#39;s Blog</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <meta name="description" content="一、Java基础面试题 面向对象?这里的对象泛指现实中一切事物，每种事物都具备自己的属性和行为。面向对象思想就是在计算机程序设计过程中，参照现实中事物，将事物的属性特征、行为特征抽象出来，描述成计算机事件的设计思想。三大特征：封装继承多态  8种数据类型 字节：byte 字符：char 短整形:short 整形int 长整型long 单精度float 双精度double 布尔boolean  权限">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaSE">
+<meta property="og:url" content="http://example.com/2021/09/20/javase/index.html">
+<meta property="og:site_name" content="Jay&#39;s Blog">
+<meta property="og:description" content="一、Java基础面试题 面向对象?这里的对象泛指现实中一切事物，每种事物都具备自己的属性和行为。面向对象思想就是在计算机程序设计过程中，参照现实中事物，将事物的属性特征、行为特征抽象出来，描述成计算机事件的设计思想。三大特征：封装继承多态  8种数据类型 字节：byte 字符：char 短整形:short 整形int 长整型long 单精度float 双精度double 布尔boolean  权限">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog-1306562150.cos.ap-guangzhou.myqcloud.com/review/total-review/image-20210525085216937.png">
+<meta property="article:published_time" content="2021-09-20T03:25:36.000Z">
+<meta property="article:modified_time" content="2021-09-21T11:12:42.417Z">
+<meta property="article:author" content="Jay">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog-1306562150.cos.ap-guangzhou.myqcloud.com/review/total-review/image-20210525085216937.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css,npm/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,npm/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css?v=233" crossorigin>
+    <link rel="stylesheet" href="/css/style.css?v=1636823277158">
+     
+    
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1636823277158">
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="Jay" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="Jay"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="Jay">
+            <img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="Jay" alt="Jay">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>13</div>
+        <div><span>标签</span>31</div>
+        <div><span>分类</span>11</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+         
+            <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
+                <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://jq.qq.com/?_wv=1027&k=5CfKHun" target="_blank" mdui-tooltip="{content: 'QQ群'}" style="color: rgb(249, 174, 8);background-color: rgba(249, 174, 8, .1);">
+            <i class="nexmoefont icon-QQ"></i>
+        </a><a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">文章分类</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/ElasticSearch/">ElasticSearch</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/JUC/">JUC</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Java/">Java</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/MyBatis-Plus/">MyBatis-Plus</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Nacos/">Nacos</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/RabbitMQ/">RabbitMQ</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/Redis/">Redis</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/SpringCloud/">SpringCloud</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/review/">review</a>
+          <span class="category-list-count">2</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/分布式事务/">分布式事务</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/数据库/">数据库</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/3NF/" style="font-size: 10px;">3NF</a> <a href="/tags/CAP/" style="font-size: 10px;">CAP</a> <a href="/tags/CompletableFuture/" style="font-size: 10px;">CompletableFuture</a> <a href="/tags/ElasticSearch/" style="font-size: 10px;">ElasticSearch</a> <a href="/tags/Eureka/" style="font-size: 10px;">Eureka</a> <a href="/tags/Fork-Join/" style="font-size: 10px;">Fork/Join</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/Hystrix/" style="font-size: 10px;">Hystrix</a> <a href="/tags/IKAnalyzer/" style="font-size: 10px;">IKAnalyzer</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Lombok/" style="font-size: 10px;">Lombok</a> <a href="/tags/Lucene/" style="font-size: 10px;">Lucene</a> <a href="/tags/MyBatis-Plus/" style="font-size: 10px;">MyBatis-Plus</a> <a href="/tags/Mybatis/" style="font-size: 20px;">Mybatis</a> <a href="/tags/Nacos/" style="font-size: 10px;">Nacos</a> <a href="/tags/RabbitMQ/" style="font-size: 10px;">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 10px;">Redis</a> <a href="/tags/Redission/" style="font-size: 10px;">Redission</a> <a href="/tags/Seata/" style="font-size: 10px;">Seata</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/SpringBoot/" style="font-size: 10px;">SpringBoot</a> <a href="/tags/SpringCloud/" style="font-size: 10px;">SpringCloud</a> <a href="/tags/SpringMVC/" style="font-size: 10px;">SpringMVC</a> <a href="/tags/Stream%E6%B5%81/" style="font-size: 10px;">Stream流</a> <a href="/tags/TCC/" style="font-size: 10px;">TCC</a> <a href="/tags/TCP/" style="font-size: 10px;">TCP</a> <a href="/tags/TTL/" style="font-size: 10px;">TTL</a> <a href="/tags/ThreadPool%E7%BA%BF%E7%A8%8B%E6%B1%A0/" style="font-size: 10px;">ThreadPool线程池</a> <a href="/tags/XA/" style="font-size: 10px;">XA</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97/" style="font-size: 10px;">阻塞队列</a>
+    </div>
+    
+  </div>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2021 Jay
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        <br><a target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"><img src="https://i.dawnlab.me/c0268c1e6cfd0863d6ba35be1575941a.png" width="150px"></a><script data-ad-client="ca-pub-2058306854838448" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
+              <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="JavaSE" class="lazyload">
+              <h1>JavaSE</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2021年09月20日</a>
+    <a><i class="nexmoefont icon-areachart"></i>2.4k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 10 分钟</a>
+</div>
+
+      
+
+      <h1 id="一、Java基础"><a href="#一、Java基础" class="headerlink" title="一、Java基础"></a>一、Java基础</h1><h1 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h1><ol>
+<li><p>面向对象?<br>这里的<strong>对象</strong>泛指现实中一切事物，每种事物都具备自己的<strong>属性</strong>和<strong>行为</strong>。<strong>面向对象思想就是在计算机程序设计过程中，参照现实中事物，将事物的属性特征、行为特征抽象出来，描述成计算机事件的设计思想</strong>。<br>三大特征：封装继承多态</p>
+</li>
+<li><p>8种数据类型</p>
+<p>字节：byte</p>
+<p>字符：char</p>
+<p>短整形:short 整形int 长整型long</p>
+<p>单精度float 双精度double</p>
+<p>布尔boolean</p>
+</li>
+<li><p>权限的关键字?</p>
+<table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th>本类</th>
+<th>本包</th>
+<th>其他包子类</th>
+<th>任意位置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>private</strong></td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+</tr>
+<tr>
+<td><strong>缺省</strong></td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+<td>×</td>
+</tr>
+<tr>
+<td><strong>protected</strong></td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>×</td>
+</tr>
+<tr>
+<td><strong>public</strong></td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+</tbody></table>
+<p>权限修饰符可以修饰：</p>
+<p>外部类：public和缺省</p>
+<p>成员变量、成员方法、构造器、成员内部类：public,protected,缺省,private</p>
+</li>
+<li><p>继承 实现 重构 重载 重写 多态?</p>
+<p>继承：是指子类可以继承父类中的一些属性和方法，无需重复定义<br>实现：实现类实现接口，重写接口里所定义的全部抽象方法<br>重构：就是通过调整程序代码改善代码的质量、性能，使其程序的设计模式和架构更趋于合理，提高软件的扩展性和维护性。<br>重载(overload)：同一个类中，方法名一样，参数列表不同<br>重写(overrive)：子类中定义与父类相同的方法，一般方法体不同，方法名和参数列表必须相同<br>多态：多态是同一个行为具有多个不同表现形式或形态的能力。多态就是同一个接口，使用不同的实例而执行不同操作。</p>
+</li>
+<li><p>反射原理是什么?</p>
+<p>Java反射就是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意方法和属性；并且能改变它的属性。总结说：反射就是把java类中的各种成分映射成一个个的Java对象，并且可以进行操作。</p>
+</li>
+<li><p>接口和抽象类的区别是什么?</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>抽象类</th>
+<th>接口</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>默认的方法实现</td>
+<td>它可以有默认的方法实现</td>
+<td>接口是抽象的，不存在方法的实现</td>
+</tr>
+<tr>
+<td>实现</td>
+<td>子类使用extends关键字继承抽象类。如果子类不是抽象类的话，它需要提供抽象类中所有声明的方法的实现。</td>
+<td>实现类使用关键字<strong>implements</strong>来实现接口。它需要提供接口中所有声明的方法的实现</td>
+</tr>
+<tr>
+<td>构造器</td>
+<td>抽象类可以有构造器</td>
+<td>接口没有</td>
+</tr>
+<tr>
+<td>与普通java类的区别</td>
+<td>除了不能实例化抽象类以外，和普通java类没有区别</td>
+<td>和类是不同的概念，接口是完全不同的类型</td>
+</tr>
+<tr>
+<td>访问修饰符</td>
+<td>抽象方法可以有<strong>public</strong>、<strong>protected</strong>和<strong>default</strong>这些修饰符</td>
+<td>接口方法默认修饰符是<strong>public</strong>。你不可以使用其它修饰符。</td>
+</tr>
+<tr>
+<td>多继承</td>
+<td>类是单继承的</td>
+<td>接口是多实现的</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>IO NIO AIO BIO</p>
+</li>
+<li><p>值传递和引用传递?<br><strong>值传递</strong>：指在调用函数时将实际参数复制一份传递到函数中，这样在函数中如果对参数进行修改，将不会影响到实际参数。<br><strong>引用传递</strong>：是指在调用函数时将实际参数的地址直接传递到函数中(的形参)，那么在函数中对参数所进行的修改，将影响到实际参数。</p>
+</li>
+<li><p>类的加载流程<br>Java源代码被编译成class字节码，最终需要加载到虚拟机中才能运行。整个生命周期包括：加载、验证、准备、解析、初始化、使用和卸载7个阶段。 </p>
+</li>
+<li><p>集合</p>
+<ul>
+<li>线程安全集合<br>Vector   Hashtable</li>
+<li>线程不安全集合<br>ArrayList<br>HashMap是线程不安全的，并允许使用 null 值和 null 键，效率高，常用。</li>
+</ul>
+</li>
+<li><p>常用的工具类有哪些?<br>java.util.String<br>java.util.Date<br>Random<br>Math<br>UUID</p>
+<p>org.springframework.util.StringUtils</p>
+</li>
+<li><p>日期的类型处理?</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 获取从1970.01.01 00:00:00到现在的毫秒数</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+
+<span class="token comment">// Sat Sep 07 20:54:07 CST 2019</span>
+<span class="token class-name">Date</span> date <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+<span class="token function">sout</span><span class="token punctuation">(</span>date<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 将日期时间转换为指定的格式</span>
+<span class="token class-name">SimpleDateFormat</span> sdf <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">SimpleDateFormat</span><span class="token punctuation">(</span><span class="token string">"yyyy-MM-dd HH:mm:ss"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">String</span> format <span class="token operator">=</span> sdf<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span>date<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Calendar类是一个抽象类，不可以使用new关键字直接创建实例。</span>
+<span class="token comment">// Calendar可以为在某一特定时刻和一组之间的转换的方法 calendar fields（日历域） 如YEAR ， MONTH ， DAY_OF_MONTH ， HOUR 等等，以及用于操纵该日历字段，如获取的日期下个星期。</span>
+<span class="token class-name">Calendar</span> ca <span class="token operator">=</span> <span class="token class-name">Calendar</span><span class="token punctuation">.</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// get：返回给定日历字段的值。</span>
+<span class="token comment">// YEAR：年份</span>
+<span class="token keyword">int</span> year <span class="token operator">=</span> ca<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token class-name">Calendar</span><span class="token punctuation">.</span>YEAR<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>year<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>枚举 泛型</p>
+</li>
+<li><p>类的加载顺序<br>双亲委托机制<br><img src="https://blog-1306562150.cos.ap-guangzhou.myqcloud.com/review/total-review/image-20210525085216937.png"></p>
+<p>双亲委派优点</p>
+<p>a.安全，可避免用户自己编写的类动态替换Java的核心类，如java.lang.String</p>
+<p>b.避免全限定命名的类重复加载(使用了findLoadClass()判断当前类是否已加载) </p>
+<p>题目：可不可以自己写个String类(也是自定义的String为何没加载到？) </p>
+<p>不可以。因为在类加载中，会根据双亲委派机制去寻找当前java.lang.String是否已被加载。由于启动类加载器已在启动时候加载了所以不会再次加载，因此使用的String是已在java核心类库加载过的String，而不是新定义的String。</p>
+</li>
+<li><p>Java中的异常分类<br>Throwable -&gt; Error,Exception</p>
+<p>Error-&gt;              严重问题，例如内存溢出</p>
+<p>Exception -&gt;     运行时异常： RuntimeException</p>
+</li>
+<li><p>List的扩容步骤</p>
+<p>分两步：</p>
+<p>1.扩容: 把原来的数组复制到另一个内存空间更大的数组中</p>
+<p>2.添加元素: 把新元素添加到扩容以后的数组中</p>
+</li>
+<li><p>HashMap的扩容</p>
+</li>
+<li><p>HashMap的源码，实现原理，JDK8中对HashMap做了怎样的优化。</p>
+<p>HaspMap扩容是怎样扩容的，为什么都是2的N次幂的大小。<br>HashMap，HashTable，ConcurrentHashMap的区别。<br>极高并发下HashTable和ConcurrentHashMap哪个性能更好，为什么，如何实现的。<br>HashMap在高并发下如果没有处理线程安全会有怎样的安全隐患，具体表现是什么。<br>java中四种修饰符的限制范围。</p>
+<p>Object类中的方法。<br>notify(),notifyAll(),wait(),clone(),equals()</p>
+<p>Java序列化的方式。<br>一个ArrayList在循环过程中删除，会不会出问题，为什么。</p>
+</li>
+<li><p>Java中final、finally、finalize的区别与用法<br><strong>1.简单区别：</strong><br>final用于声明属性，方法和类，分别表示属性不可改变，方法不可覆盖，类不可继承。<br>finally是异常处理语句结构的一部分，表示总是执行。执行一些最终操作例如关闭连接，释放锁。<br>finalize是Object类的一个方法，在垃圾收集器执行的时候会调用被回收对象的此方法，供垃圾收集时的其他资源回收，例如关闭文件等。<br><strong>2.中等区别：</strong><br>final：java中的关键字，修饰符。<br>A).如果一个类被声明为final，就意味着它不能再派生出新的子类，不能作为父类被继承。因此，一个类不能同时被声明为abstract抽象类的和final的类。<br>B).如果将变量或者方法声明为final，可以保证它们在使用中不被改变.<br>　　1)被声明为final的变量必须在声明时给定初值，而在以后的引用中只能读取，不可修改。<br>　　2)被声明final的方法只能使用，不能重载。<br>finally：java的一种异常处理机制。<br>　　finally是对Java异常处理模型的最佳补充。finally结构使代码总会执行，而不管无异常发生。使用finally可以维护对象的内部状态，并可以清理非内存资源。特别是在关闭数据库连接这方面，如果程序员把数据库连接的close()方法放到finally中，就会大大降低程序出错的几率。<br>finalize：Java中的一个方法名。<br>Java技术使用finalize()方法在垃圾收集器将对象从内存中清除出去前，做必要的清理工作。这个方法是由垃圾收集器在确定这个对象没被引用时对这个对象调用的。它是在Object类中定义的，因此所的类都继承了它。子类覆盖finalize()方法以整理系统资源或者执行其他清理工作。finalize()方法是在垃圾收集器删除对象之前对这个对象调用的。</p>
+</li>
+<li><p>==和equals()的区别首先的区别是，equals 是方法，而 == 是操作符；<br>1）首先的区别是，equals 是方法，而 == 是操作符；</p>
+<p>2）对于基本类型的变量来说（如 <code>short</code>、 <code>int</code>、 <code>long</code>、 <code>float</code>、 <code>double</code>），只能使用 == ，因为这些基本类型的变量没有 equals 方法。对于基本类型变量的比较，使用 == 比较， <strong>一般比较的是它们的值</strong>。</p>
+<p>3）对于引用类型的变量来说（例如 String 类）才有 equals 方法，因为 String 继承了 Object 类， equals 是<br>Object 类的通用方法。对于该类型对象的比较，默认情况下，也就是没有复写 Object 类的 equals 方法，使用 == 和 equals 比较是一样效果的，都是<strong>比较的是它们在内存中的存放地址</strong>。但是对于某些类来说，为了满足自身业务需求，可能存在 equals 方法被复写的情况，这时使用 equals 方法比较需要看具体的情况，<strong>例如 String 类，使用 equals 方法会比较它们的值</strong>；</p>
+</li>
+</ol>
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>本文作者：</strong>Jay<br>
+        <strong>本文链接：</strong><a href="http://example.com/2021/09/20/javase/" title="http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;09&#x2F;20&#x2F;javase&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;example.com&#x2F;2021&#x2F;09&#x2F;20&#x2F;javase&#x2F;</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/Java/">Java</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/Java/" rel="tag">Java</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="搜索" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+ 
+
+<script async src="/js/app.js?v=1636823277159"></script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+</body>
+
+</html>
