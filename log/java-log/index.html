@@ -1,0 +1,209 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Java日志体系 | Jay's Blog</title><meta name="keywords" content="Log4j2,Logback,Log4j"><meta name="author" content="Jay"><meta name="copyright" content="Jay"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一、Java日志 在应用当中，我们少不了要记录日志，记录日志的目的有两个：  用于线上错误排查  分析日志（埋点日志）   日志文件是用于记录系统操作事件的文件集合，可分为事件日志和消息日志。具有处理历史数据、诊断问题的追踪以及理解系统的活动等重要作用。  1.1 调试日志软件开发中，我们经常需要去调试程序，做一些信息，状态的输出便于我们查询程序的运行状况。为了让我们能够更加灵活和方便的控制这些调">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java日志体系">
+<meta property="og:url" content="https://www.1thing.top/log/java-log/index.html">
+<meta property="og:site_name" content="Jay&#39;s Blog">
+<meta property="og:description" content="一、Java日志 在应用当中，我们少不了要记录日志，记录日志的目的有两个：  用于线上错误排查  分析日志（埋点日志）   日志文件是用于记录系统操作事件的文件集合，可分为事件日志和消息日志。具有处理历史数据、诊断问题的追踪以及理解系统的活动等重要作用。  1.1 调试日志软件开发中，我们经常需要去调试程序，做一些信息，状态的输出便于我们查询程序的运行状况。为了让我们能够更加灵活和方便的控制这些调">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://blog-1306562150.cos.ap-guangzhou.myqcloud.com/Log/IntelliJ%20IDEA_1536x711.svg">
+<meta property="article:published_time" content="2021-12-21T12:25:36.000Z">
+<meta property="article:modified_time" content="2022-01-06T06:34:33.975Z">
+<meta property="article:author" content="Jay">
+<meta property="article:tag" content="Log4j2">
+<meta property="article:tag" content="Logback">
+<meta property="article:tag" content="Log4j">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://blog-1306562150.cos.ap-guangzhou.myqcloud.com/Log/IntelliJ%20IDEA_1536x711.svg"><link rel="shortcut icon" href="/img/%E6%97%A0%E4%BA%BA%E6%9C%BA.png"><link rel="canonical" href="https://www.1thing.top/log/java-log/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"prismjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":300},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#007fff","bgDark":"#121212","position":"top-center"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Java日志体系',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-01-06 14:34:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/footer.css"><link rel="stylesheet" href="/css/socialicon.css"><link rel="stylesheet" href="/css/menubar.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://blog-1306562150.cos.ap-guangzhou.myqcloud.com/resource/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 学习</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Spring/"><i class="fa-fw iconfont icon-spring-edf462fec682b9d48cf628eaf9e19521"></i><span> Spring</span></a></li><li><a class="site-page child" href="/SpringBoot/"><i class="fa-fw iconfont icon-springboot"></i><span> SpringBoot</span></a></li><li><a class="site-page child" href="/springCloud/springCloud/index.html"><i class="fa-fw iconfont icon-SPRINGCLOUD"></i><span> SpringCloud</span></a></li><li><a class="site-page child" href="/redis/redis/index.html"><i class="fa-fw iconfont icon-REDIS"></i><span> Redis</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 技术</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/bugs/"><i class="fa-fw fas fa-tags"></i><span> Bug</span></a></li><li><a class="site-page child" href="/categories/algorithm/"><i class="fa-fw fas fa-tags"></i><span> 算法</span></a></li><li><a class="site-page child" href="/categories/interview/"><i class="fa-fw fas fa-tags"></i><span> 面试</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://blog-1306562150.cos.ap-guangzhou.myqcloud.com/Log/IntelliJ%20IDEA_1536x711.svg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Jay's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 学习</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/Spring/"><i class="fa-fw iconfont icon-spring-edf462fec682b9d48cf628eaf9e19521"></i><span> Spring</span></a></li><li><a class="site-page child" href="/SpringBoot/"><i class="fa-fw iconfont icon-springboot"></i><span> SpringBoot</span></a></li><li><a class="site-page child" href="/springCloud/springCloud/index.html"><i class="fa-fw iconfont icon-SPRINGCLOUD"></i><span> SpringCloud</span></a></li><li><a class="site-page child" href="/redis/redis/index.html"><i class="fa-fw iconfont icon-REDIS"></i><span> Redis</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 技术</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/bugs/"><i class="fa-fw fas fa-tags"></i><span> Bug</span></a></li><li><a class="site-page child" href="/categories/algorithm/"><i class="fa-fw fas fa-tags"></i><span> 算法</span></a></li><li><a class="site-page child" href="/categories/interview/"><i class="fa-fw fas fa-tags"></i><span> 面试</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Java日志体系</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="fa-fw post-meta-icon far fa-calendar-alt"></i><span class="post-meta-label">发表于</span><time datetime="2021-12-21T12:25:36.000Z" title="undefined 2021-12-21 20:25:36">2021-12-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Log/">Log</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>3分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Java日志体系"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="一、Java日志"><a href="#一、Java日志" class="headerlink" title="一、Java日志"></a>一、Java日志</h1><blockquote>
+<p>在应用当中，我们少不了要记录日志，记录日志的目的有两个：</p>
+<ol>
+<li>用于线上错误排查 </li>
+<li>分析日志（埋点日志）</li>
+</ol>
+</blockquote>
+<p><strong>日志文件是用于记录系统操作事件的文件集合</strong>，可分为事件日志和消息日志。具有处理历史数据、诊断问题的追踪以及理解系统的活动等重要作用。 </p>
+<h2 id="1-1-调试日志"><a href="#1-1-调试日志" class="headerlink" title="1.1 调试日志"></a>1.1 调试日志</h2><p>软件开发中，我们经常需要去调试程序，做一些信息，状态的输出便于我们查询程序的运行状况。为了让我们能够更加灵活和方便的控制这些调试的信息，所有我们需要专业的日志技术。java中寻找bug需要重现。调试也就是debug 可以在程序运行中暂停程序运行，可以查看程序在运行中的情况。日志主要是为了更方便的去重现问题。 </p>
+<h2 id="1-2-系统日志"><a href="#1-2-系统日志" class="headerlink" title="1.2 系统日志"></a><strong>1.2</strong> <strong>系统日志</strong></h2><p>系统日志是记录系统中硬件、软件和系统问题的信息，同时还可以监视系统中发生的事件。用户可以通过它来检查错误发生的原因，或者寻找受到攻击时攻击者留下的痕迹。系统日志包括系统日志、应用程序日志和安全日志。</p>
+<h1 id="二、日志发展史"><a href="#二、日志发展史" class="headerlink" title="二、日志发展史"></a>二、日志发展史</h1><h2 id="1-阶段一"><a href="#1-阶段一" class="headerlink" title="1. 阶段一"></a>1. 阶段一</h2><blockquote>
+<p>2001年以前，Java是没有日志库的，打印日志全凭<code>System.out</code>和<code>System.err</code></p>
+</blockquote>
+<p>缺点：</p>
+<ol>
+<li><strong>产生大量的IO操作  同时在生产环境中 无法合理的控制是否需要输出</strong></li>
+<li><strong>输出的内容不能保存到文件</strong></li>
+<li><strong>只打印在控制台，打印完就过去了，也就是说除非你一直盯着程序跑</strong></li>
+<li><strong>无法定制化，且日志粒度不够细</strong></li>
+</ol>
+<h2 id="2-阶段二"><a href="#2-阶段二" class="headerlink" title="2. 阶段二"></a>2. 阶段二</h2><blockquote>
+<p>2001年，一个叫<code>Ceki Gülcü</code>的大佬搞了一个日志库<code>log4j</code>，后来<code>Log4j</code>成为<code>Apache</code>项目，<code>Ceki</code>也加入<code>Apache</code>组织</p>
+</blockquote>
+<p><code>Apache</code>还曾经建议<code>Sun</code>引入<code>Log4j</code>到<code>Java</code>的标准库中，但<code>Sun</code>拒绝了</p>
+<h2 id="3-阶段三"><a href="#3-阶段三" class="headerlink" title="3. 阶段三"></a>3. 阶段三</h2><blockquote>
+<p><code>Sun</code>有自己的小心思，<code>2002</code>年<code>2</code>月<code>JDK1.4</code>发布，<code>Sun</code>推出了自己的日志标准库<code>JUL（Java Util Logging）</code>，其实是照着<code>Log4j</code>抄的，而且还没抄好，还是在<code>JDK1.5</code>以后性能和可用性才有所提升。</p>
+</blockquote>
+<p>由于Log4j比JUL好用，并且成熟，所以<code>Log4j</code>在选择上占据了一定的优势。</p>
+<h2 id="4-阶段四"><a href="#4-阶段四" class="headerlink" title="4. 阶段四"></a>4. 阶段四</h2><blockquote>
+<p><code>2002</code>年<code>8</code>月<code>Apache</code>推出了<code>JCL（Jakarta Commons Logging）</code>，也就是日志抽象层，支持运行时动态加载日志组件的实现，当然也提供一个默认实现<code>Simple Log</code>（<strong>在<code>ClassLoader</code>中进行查找，如果能找到<code>Log4j</code>则默认使用<code>log4j</code>实现，如果没有则使用<code>JUL</code> 实现，再没有则使用JCL内部提供的<code>Simple Log</code>实现</strong>）。</p>
+</blockquote>
+<p><img src="https://blog-1306562150.cos.ap-guangzhou.myqcloud.com/Log/image-20211012133214379.png" alt="image-20211012133214379"></p>
+<p>但是<code>JCL</code>有三个缺点：</p>
+<ol>
+<li><strong>效率较低</strong></li>
+<li><strong>容易引发混乱</strong></li>
+<li><strong>使用了自定义ClassLoader的程序中，使用JCL会引发内存泄露</strong></li>
+</ol>
+<h2 id="5-阶段五"><a href="#5-阶段五" class="headerlink" title="5. 阶段五"></a>5. 阶段五</h2><blockquote>
+<p><code>2006</code>年<code>Ceki</code>（<code>Log4j</code>的作者）因为一些原因离开了<code>Apache</code>组织，之后<code>Ceki</code>觉得<code>JCL</code>不好用，自己撸了一套新的日志标准接口规范<code>Slf4j（Simple Logging Facade for Java）</code>，也可以称为日志门面，很明显<code>Slf4j</code>是对标<code>JCL</code>，后面也证明了<code>Slf4j</code>比<code>JCL</code>更优秀。</p>
+</blockquote>
+<p><code>Ceki</code>提供了一系列的桥接包来帮助<code>Slf4j</code>接口与其他日志库建立关系，这种方式称为桥接设计模式。</p>
+<p>代码使用<code>Slf4j</code>接口，就可以实现日志的统一标准化，后续如果想要更换日志实现，只需要引入<code>Slf4j</code>与相关的桥接包，再引入具体的日志标准库即可。</p>
+<h2 id="6-阶段六"><a href="#6-阶段六" class="headerlink" title="6. 阶段六"></a>6. 阶段六</h2><blockquote>
+<p><code>Ceki</code>觉得市场上的日志标准库都是间接实现<code>Slf4j</code>接口，也就是说每次都需要配合桥接包，因此在<code>2006</code>年，<code>Ceki</code>巨佬基于<code>Slf4j</code>接口撸出了<code>Logback</code>日志标准库，做为<code>Slf4j</code>接口的默认实现，<code>Logback</code>也十分给力，在功能完整度和性能上超越了所有已有的日志标准库。</p>
+</blockquote>
+<p><strong>根本原因还在于，随着用户体量的提升，Log4j无法满足高性能的要求，成为应用的性能瓶颈</strong></p>
+<p>目前<code>Java</code>日志体系关系图如下</p>
+<p><img src="https://blog-1306562150.cos.ap-guangzhou.myqcloud.com/Log/image-20211012135029284.png" alt="image-20211012135029284"></p>
+<h2 id="7-阶段七"><a href="#7-阶段七" class="headerlink" title="7. 阶段七"></a>7. 阶段七</h2><blockquote>
+<p><code>2012</code>年，<code>Apache</code>直接推出新项目<code>Log4j2</code>（不兼容<code>Log4j</code>），<code>Log4j2</code>全面借鉴<code>Slf4j+Logback</code>。</p>
+</blockquote>
+<p><code>Log4j2</code>不仅仅具有<code>Logback</code>的所有特性，还做了分离设计，分为<code>log4j-api</code>和<code>log4j-core</code>，<code>log4j-api</code>是日志接口，<code>log4j-core</code>是日志标准库，并且<code>Apache</code>也为<code>Log4j2</code>提供了各种桥接包。</p>
+<p><img src="https://blog-1306562150.cos.ap-guangzhou.myqcloud.com/Log/image-20211012135415814.png" alt="image-20211012135415814"></p>
+<blockquote>
+<p>虽然Log4j2有明显的抄袭嫌疑，但是毕竟是最新的日志库，汲取了logback优秀设计的同时，还解决了一些问题，性能有了极大的提升，官方测试是18倍。</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Jay</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.1thing.top/log/java-log/">https://www.1thing.top/log/java-log/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.1thing.top" target="_blank">Jay's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Log4j2/">Log4j2</a><a class="post-meta__tags" href="/tags/Logback/">Logback</a><a class="post-meta__tags" href="/tags/Log4j/">Log4j</a></div><div class="post_share"><div class="social-share" data-image="https://blog-1306562150.cos.ap-guangzhou.myqcloud.com/Log/IntelliJ%20IDEA_1536x711.svg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/log/java-log-2/"><img class="prev-cover" src="https://blog-1306562150.cos.ap-guangzhou.myqcloud.com/Log/IntelliJ%20IDEA_1536x711(1).svg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Java日志框架</div></div></a></div><div class="next-post pull-right"><a href="/bugs/bug20211117/"><img class="next-cover" src="https://blog-1306562150.cos.ap-guangzhou.myqcloud.com/Log/IntelliJ%20IDEA_1536x711(2).svg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">项目启动问题</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/log/java-log-2/" title="Java日志框架"><img class="cover" src="https://blog-1306562150.cos.ap-guangzhou.myqcloud.com/Log/IntelliJ%20IDEA_1536x711(1).svg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-21</div><div class="title">Java日志框架</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://blog-1306562150.cos.ap-guangzhou.myqcloud.com/resource/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Jay</div><div class="author-info__description">命数如织，当为磐石</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/GitHub4Jay" target="_blank" title="Github"><i class="iconfont icon-github card_icon"></i></a><a class="social-icon" href="https://gitee.com/li_jia_jie" target="_blank" title="Gitee"><i class="iconfont icon-gitee card_icon"></i></a><a class="social-icon" href="https://13977174486@163.com" target="_blank" title="Email"><i class="iconfont icon-Email card_icon"></i></a><a class="social-icon" href="https://www.bilibili.com" target="_blank" title="Bilibili"><i class="iconfont icon-bilibili card_icon"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的博客。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81Java%E6%97%A5%E5%BF%97"><span class="toc-text">一、Java日志</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E8%B0%83%E8%AF%95%E6%97%A5%E5%BF%97"><span class="toc-text">1.1 调试日志</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E7%B3%BB%E7%BB%9F%E6%97%A5%E5%BF%97"><span class="toc-text">1.2 系统日志</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%97%A5%E5%BF%97%E5%8F%91%E5%B1%95%E5%8F%B2"><span class="toc-text">二、日志发展史</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E9%98%B6%E6%AE%B5%E4%B8%80"><span class="toc-text">1. 阶段一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%98%B6%E6%AE%B5%E4%BA%8C"><span class="toc-text">2. 阶段二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E9%98%B6%E6%AE%B5%E4%B8%89"><span class="toc-text">3. 阶段三</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E9%98%B6%E6%AE%B5%E5%9B%9B"><span class="toc-text">4. 阶段四</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E9%98%B6%E6%AE%B5%E4%BA%94"><span class="toc-text">5. 阶段五</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E9%98%B6%E6%AE%B5%E5%85%AD"><span class="toc-text">6. 阶段六</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E9%98%B6%E6%AE%B5%E4%B8%83"><span class="toc-text">7. 阶段七</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2021 - 2022 By Jay</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="icp"><a target="_blank" rel="noopener" href="http://beian.miit.gov.cn/"><span>桂ICP备2021008655号-1</span></a></div><div class="icp"><a target="_blank" rel="noopener" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030602006429"><img class="icp-icon" src="https://blog-1306562150.cos.ap-guangzhou.myqcloud.com/resource/gongan.png"/><span>粤公网安备 44030602006429号</span></a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

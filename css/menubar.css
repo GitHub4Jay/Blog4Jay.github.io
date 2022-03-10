@@ -1,0 +1,31 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3036791 */
+  src: url('//at.alicdn.com/t/font_3036791_6dy4tq6n0pc.woff2?t=1640011962191') format('woff2'),
+       url('//at.alicdn.com/t/font_3036791_6dy4tq6n0pc.woff?t=1640011962191') format('woff'),
+       url('//at.alicdn.com/t/font_3036791_6dy4tq6n0pc.ttf?t=1640011962191') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-REDIS:before {
+  content: "\e627";
+}
+
+.icon-SPRINGCLOUD:before {
+  content: "\e671";
+}
+
+.icon-springboot:before {
+  content: "\e602";
+}
+
+.icon-spring-edf462fec682b9d48cf628eaf9e19521:before {
+  content: "\e605";
+}
+
